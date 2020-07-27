@@ -13,21 +13,21 @@
 		insert into bed
 		(bedid, roomid)
 		values
-		(#{id},#{roomId})
+		(#{id}, #{roomId})
 	</insert>
 
 	<update id="update" parameterType="Bed">
-		update Bed set
+		update bed set
 		roomid = #{roomId}
 		where bedid=#{id}
 	</update>
 
 	<delete id="delete" parameterType="Bed">
-		delete from Bed where bedid=#{id}
+		delete from bed where bedid=#{id}
 	</delete>
 
 	<select id="selectByAll" resultMap="BedResultMap">
-		select * from Bed
+		select * from bed
 	</select>
 
 	<select id="selectById" resultMap="BedResultMap">

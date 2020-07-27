@@ -10,7 +10,7 @@ import com.hitstu.oa.checkin.mapper.IBedMapper;
 import com.hitstu.oa.checkin.model.BedModel;
 import com.hitstu.oa.checkin.service.IBedService;
 
-@Service("elderlyService")
+@Service("bedService")
 @Transactional
 public class BedServiceImpl implements IBedService {
 	@Autowired
