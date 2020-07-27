@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.checkin.mapper">
+	<!-- 老人查询基础映射，不包含关联属性 -->
+	<resultMap id="ElderlyResultMap" type="Elderly">
+		<id property="elderlyId" column="elderlyid" />
+		<result property="bedid" column="bedid" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Elderly">
+		insert into elderly
+		(elderlyid, sex, age)
+		values
+		(#{elderlyId},#{sex},#{age}})
+	</insert>
+
+	<update id="update">
+		update elderly set
+		bedid=#{bed.bedid},sex=#{sex},age=#{age}
+		where elderlyid=#{elderlyid}
+	</update>
+
+	<delete id="delete">
+		delete from elderly where elderlyid=#{elderlyid}
+	</delete>
+
+	<select id="selectByAll" resultMap="ElderlyResultMap">
+		select * from elderly
+	</select>
+
+	<select id="selectById" resultMap="ElderlyResultMap">
+		select * from elderly
+		where
+		elderlyid=#{id}
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="ElderlyResultMap">
+		select * from elderly
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from elderly
+	</select>
+
+
+</mapper>
