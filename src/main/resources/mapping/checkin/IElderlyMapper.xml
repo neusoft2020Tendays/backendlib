@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hitstu.oa.checkin.mapper">
+<mapper namespace="com.hitstu.oa.checkin.mapper.IElderlyMapper">
 	<!-- 老人查询基础映射，不包含关联属性 -->
 	<resultMap id="ElderlyResultMap" type="Elderly">
 		<id property="elderlyId" column="elderlyid" />
@@ -15,7 +15,7 @@
 		insert into elderly
 		(elderlyid, sex, age)
 		values
-		(#{elderlyId},#{sex},#{age}})
+		(#{elderlyId},#{sex},#{age})
 	</insert>
 
 	<update id="update">
