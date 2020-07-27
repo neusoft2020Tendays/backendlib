@@ -119,5 +119,4 @@
             and a.sex = #{sex}
         </if>
     </select>
-
 </mapper>
