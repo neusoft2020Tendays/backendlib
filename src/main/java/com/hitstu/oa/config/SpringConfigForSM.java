@@ -46,7 +46,7 @@ public class SpringConfigForSM {
 	  Resource resource= new ClassPathResource("mybatisconfigforSM.xml");
 	  factoryBean.setConfigLocation(resource);	
 	  //设置Model类别名的扫描路径
-	  factoryBean.setTypeAliasesPackage("com.hitstu.oa.hr.model,com.hitstu.oa.checkin.model");	
+	  factoryBean.setTypeAliasesPackage("com.hitstu.oa.hr.model, com.hitstu.oa.checkin.model");	
 	  return factoryBean.getObject();
 	}
 	//配置事务管理器

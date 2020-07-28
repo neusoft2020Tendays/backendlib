@@ -40,7 +40,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<!-- mapper resource="mapping/hr/IDepartmentMapper.xml" /-->
+		<mapper resource="mapping/hr/IDepartmentMapper.xml" />
 		<mapper resource="mapping/checkin/IElderlyMapper.xml" />
 	</mappers>
 </configuration>

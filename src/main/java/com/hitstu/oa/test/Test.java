@@ -12,7 +12,7 @@ public class Test {
 		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigForSM.class);
 		IElderlyService elderlyService = context.getBean("elderlyService", IElderlyService.class);
 		ElderlyModel elderlyModel = new ElderlyModel();
-		elderlyModel.setElderlyId("1");
+		elderlyModel.setElderlyId("2");
 		elderlyModel.setAge(80);
 		elderlyModel.setSex("M");
 		try {

@@ -13,9 +13,9 @@
 3. store
    1. 仓库管理warehouse（**仓库号warehouseid**，*仓库负责人empid*，仓库地址address）王航
    2. 货物管理goods（**货物号goodsid**，货物名称name，货物单价price）李佳朋
-   3. 货物存放placement（**货物号goodsid**，**仓库号warehouse**，存放数量amount）霸晨民
-   4. 货物购买信息purchase（**货物号**，**购买时间date**，购买额amount）沈子鸣
-   5. 货物使用信息consume（**货物号**，**使用时间date**，使用额amount）沈子鸣
+   3. 货物存放placement（**货物号goodsid**，**仓库号warehouseid**，存放数量amount）霸晨民
+   4. 货物购买信息purchase（**货物号goodsid**，**购买时间date**，购买额amount）沈子鸣
+   5. 货物使用信息consume（**货物号goodsid**，**使用时间date**，使用额amount）沈子鸣
 
 收支情况报表、床位可视化
 

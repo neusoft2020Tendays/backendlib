@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.hr.mapper.IDepartmentMapper">
+	<!-- 部门查询基础映射，不包含关联属性 -->
+	<resultMap id="DepartmentResultMap" type="Department">
+		<id property="deptid" column="deptid" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Department">
+		insert into department
+		(deptid, name)
+		values
+		(#{deptid},#{name})
+	</insert>
+
+	<update id="update">
+		update department set
+		name=#{name} where
+		deptid=#{deptid}
+	</update>
+
+	<delete id="delete">
+		delete from department where
+		deptid=#{deptid}
+	</delete>
+
+	<select id="selectByAll" resultMap="DepartmentResultMap">
+		select * from department
+	</select>
+
+	<select id="selectById" resultMap="DepartmentResultMap">
+		select * from department
+		where
+		deptid=#{deptid}
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="DepartmentResultMap">
+		select * from
+		department
+		limit #{start}, #{rows}
+	</select>
+
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from
+		department
+	</select>
+
+
+</mapper>
