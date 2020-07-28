@@ -65,4 +65,8 @@ public class BedServiceImpl implements IBedService {
 		return pages;
 	}
 
+	@Override
+	public List<BedModel> getFreeBeds() throws Exception {
+		return bedMapper.getFreeBeds();
+	}
 }

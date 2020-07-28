@@ -20,4 +20,6 @@ public interface IBedService {
 	public int getCountByAll() throws Exception;
 	
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	public List<BedModel> getFreeBeds()throws Exception;
 }

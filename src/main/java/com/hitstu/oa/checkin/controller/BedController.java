@@ -83,4 +83,13 @@ public class BedController {
 		result.setMessage("取得特定床位成功");
 		return result;
 	}
+	
+	@GetMapping("/getFreeBedsList")
+	public Result<BedModel> getFreeBedsList() throws Exception {
+		Result<BedModel> result = new Result<>();
+		result.setList(bedService.getFreeBeds());
+		result.setStatus("OK");
+		result.setMessage("取得空闲床位成功");
+		return result;
+	}
 }

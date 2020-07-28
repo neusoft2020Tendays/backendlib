@@ -21,4 +21,6 @@ public interface IBedMapper {
 	public List<BedModel> selectByAllWithPage(int start, int rows) throws Exception;
 
 	public int selectCountByAll() throws Exception;
+	
+	public List<BedModel> getFreeBeds() throws Exception;
 }

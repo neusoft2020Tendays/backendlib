@@ -45,4 +45,10 @@
 		select count(*) from bed
 	</select>
 	
+	<select id="getFreeBeds" resultMap="BedResultMap">
+	   select * from bed where bedid not in (
+	   select a.bedid from bed a inner join elderly b on a.bedid = b.bedid
+	   )
+	</select>
+	
 </mapper>
