@@ -4,28 +4,23 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 //Spring 配置类，用于配置Spring集成MyBatis
 
-@Configuration
-@ComponentScan(basePackages= {"com.hitstu.oa"})
-@EnableAspectJAutoProxy
-@MapperScan(basePackages={"com.hitstu.oa.hr.mapper","com.hitstu.oa.checkin.mapper"})
-@EnableTransactionManagement  //启用事务Advice
+//@Configuration
+//@ComponentScan(basePackages= {"com.hitstu.oa"})
+//@EnableAspectJAutoProxy
+//@MapperScan(basePackages={"com.hitstu.oa.hr.mapper","com.hitstu.oa.checkin.mapper"})
+//@EnableTransactionManagement  //启用事务Advice
 public class SpringConfigForSM {
 	//配置HirariCP连接池
 	@Bean

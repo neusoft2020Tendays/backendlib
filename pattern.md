@@ -7,7 +7,7 @@
    4. 收费管理cost（**收费costid**，*老人elderlyid*，收费金额amount，收费时间time）李佳朋
    5. 接待管理guest（**接待guestid**，*老人elderlyid*，来访人员数量num，来访人员身份identity）王航
 2. hr
-   1. 人事管理hr（**员工empid**，*部门deptid*，姓名name，性别sex，年龄age，离职状态fired，请假leave）霸晨民
+   1. 人事管理hr（**员工empid**，*部门deptid*，姓名name，性别sex，年龄age，离职状态fired，请假vacation）霸晨民
    2. 工资管理salary（**工资salaryid**，*员工empid*，工资支付amount，支付时间time）李佳朋
    3. 部门管理department（**部门deptid**，部门名称name）沈子鸣
 3. store

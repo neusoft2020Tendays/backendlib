@@ -1,23 +1,28 @@
 package com.hitstu.oa.hr.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hitstu.oa.hr.model.DepartmentModel;
 import com.hitstu.oa.hr.service.IDepartmentService;
 import com.hitstu.oa.restresult.Result;
 
-//@RestController
-//@RequestMapping(value = "/department")
+@RestController
+@RequestMapping(value = "/department")
+@CrossOrigin(origins = {"*", "null"})
 public class DepartmentController {
 
 	@Autowired
 	private IDepartmentService departmentService = null;
 
-	@RequestMapping(value = "/add")
-	public Result<String> add(DepartmentModel DepartmentModel) throws Exception {
+	@PostMapping(value="/add")
+	public Result<String> add(@RequestBody DepartmentModel DepartmentModel) throws Exception {
 		departmentService.add(DepartmentModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
@@ -25,8 +30,8 @@ public class DepartmentController {
 		return result;
 	}
 
-	@RequestMapping(value = "/modify")
-	public Result<String> modify(DepartmentModel DepartmentModel) throws Exception {
+	@PostMapping(value="/modify")
+	public Result<String> modify(@RequestBody DepartmentModel DepartmentModel) throws Exception {
 		departmentService.modify(DepartmentModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
@@ -34,8 +39,8 @@ public class DepartmentController {
 		return result;
 	}
 
-	@RequestMapping(value = "/delete")
-	public Result<String> delete(DepartmentModel DepartmentModel) throws Exception {
+	@PostMapping(value="/delete")
+	public Result<String> delete(@RequestBody DepartmentModel DepartmentModel) throws Exception {
 		departmentService.delete(DepartmentModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
@@ -44,7 +49,7 @@ public class DepartmentController {
 	}
 
 	// 取得部门列表，分页模式
-	@GetMapping(value = "/list/all/page")
+	@GetMapping(value="/list/all/page")
 	public Result<DepartmentModel> getListByAllWithPage(@RequestParam(required = false, defaultValue = "5") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 		Result<DepartmentModel> result = new Result<>();
