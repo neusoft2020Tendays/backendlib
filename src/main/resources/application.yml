@@ -16,4 +16,4 @@ mybatis:
 #showSql
 logging:
   level:
-    com.hitstu.oa.mapper : debug
+    com.hitstu.oa: debug

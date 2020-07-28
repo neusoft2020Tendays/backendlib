@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.hr.mapper.IEmployeeMapper">
+
+	<resultMap id="EmployeeResultMap" type="Employee">
+		<id property="id" column="empid" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="fired" column="fired" />
+		<result property="leave" column="vacation" />
+	</resultMap>
+	
+    <resultMap type="Employee" id="EmployeeResultMapWithDepartment" 
+    extends="EmployeeResultMap">
+       <association property="department" 
+       resultMap="com.hitstu.oa.checkin.mapper.IDepartmentMapper.DepartmentResultMap"></association>
+    </resultMap>
+
+	<insert id="insert" parameterType="Employee">
+		insert into employee values 
+		(#{id}, #{department.deptid}, #{name}, #{sex}, #{age}, #{fired}, #{leave})
+	</insert>
+
+	<update id="update" parameterType="Employee">
+		update employee set deptid = #{department.deptid}, name = #{name}, sex = #{sex}, age = #{age}, fired = #{fired}, vacation = #{leave} where empid = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Employee">
+		delete from employee where empid = #{id}
+	</delete>
+
+	<select id="selectByAll" resultMap="EmployeeResultMap">
+		select * from employee
+	</select>
+
+	<select id="selectById" resultMap="EmployeeResultMap">
+		select * from employee where empid = #{id}
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="EmployeeResultMap">
+		select * from employee
+		limit #{start}, #{rows}
+	</select>
+
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from employee
+	</select>
+    
+    <select id="selectByIdWithDepartment" resultMap="EmployeeResultMapWithDepartment">
+        select a.*, b.* from employee a inner join department b on a.deptid = b.deptid
+        where a.empid = #{id}
+    </select>
+    
+    <select id="selectByAllWithDepartment" resultMap="EmployeeResultMapWithDepartment">
+        select a.*, b.* from employee a inner join department b on a.deptid = b.deptid
+    </select>
+    
+    <select id="selectByAllWithDepartmentWithPage" resultMap="EmployeeResultMapWithDepartment">
+        select a.*, b.* from employee a inner join department b on a.deptid = b.deptid
+        limit #{start}, #{rows}
+    </select>
+    
+    <select id="selectListByConditionWithDepartmentWithPage" resultMap="EmployeeResultMapWithDepartment">
+        select * from employee a inner join department b on a.deptid = b.depetid 
+        <where/>
+
+        <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
+            and a.age &gt;= #{lowAge}
+            and a.age &lt;= #{highAge}
+        </if>
+        
+        <if test="highAge &gt; 0 and lowAge &lt;= 0">
+            and a.age &lt;= #{highAge}
+        </if>
+        
+        <if test="highAge &lt;= 0 and lowAge &gt; 0">
+            and a.age &gt;= #{lowAge}
+        </if>
+        
+        <if test="nameKey != null and nameKey != '' ">
+            and a.name like #{nameKey}
+        </if>
+        
+        <if test="sex != null and sex != ''">
+            and a.sex = #{sex}
+        </if>
+        limit ${start}, #{rows}
+    </select>
+    
+    <select id="selectCountByCondition" resultType="_int">
+        select count(*) from employee a inner join department b on a.deptid = b.depetid 
+        <where/>
+
+        <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
+            and a.age &gt;= #{lowAge}
+            and a.age &lt;= #{highAge}
+        </if>
+        
+        <if test="highAge &gt; 0 and lowAge &lt;= 0">
+            and a.age &lt;= #{highAge}
+        </if>
+        
+        <if test="highAge &lt;= 0 and lowAge &gt; 0">
+            and a.age &gt;= #{lowAge}
+        </if>
+        
+        <if test="nameKey != null and nameKey != '' ">
+            and a.name like #{nameKey}
+        </if>
+        
+        <if test="sex != null and sex != ''">
+            and a.sex = #{sex}
+        </if>
+    </select>
+</mapper>
