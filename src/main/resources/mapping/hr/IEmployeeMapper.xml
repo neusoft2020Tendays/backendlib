@@ -3,33 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hitstu.oa.hr.mapper.IEmployeeMapper">
-	<!-- 老人查询基础映射，不包含关联属性 -->
+
 	<resultMap id="EmployeeResultMap" type="Employee">
 		<id property="id" column="empid" />
 		<result property="name" column="name" />
 		<result property="sex" column="sex" />
 		<result property="age" column="age" />
 		<result property="fired" column="fired" />
-		<result property="leave" column="leave" />
+		<result property="leave" column="vacation" />
 	</resultMap>
 	
-	<resultMap type="Employee" id="EmployeeResultMapWithDepartment" 
-	extends="EmployeeResultMap">
-	   <association property="department" 
-	   resultMap="com.hitstu.oa.checkin.mapper.IDepartmentMapper.DepartmentResultMap"></association>
-	</resultMap>
+    <resultMap type="Employee" id="EmployeeResultMapWithDepartment" 
+    extends="EmployeeResultMap">
+       <association property="department" 
+       resultMap="com.hitstu.oa.checkin.mapper.IDepartmentMapper.DepartmentResultMap"></association>
+    </resultMap>
 
 	<insert id="insert" parameterType="Employee">
-		insert into employee 
-		(empid, deptid, name, sex, age, fired, leave) values
+		insert into employee values 
 		(#{id}, #{department.deptid}, #{name}, #{sex}, #{age}, #{fired}, #{leave})
 	</insert>
 
 	<update id="update" parameterType="Employee">
-		update employee set
-		deptid = #{department.deptid}, name = #{name}, sex = #{sex}, 
-		age = #{age}, fired = #{fired}, leave = #{leave} 
-        where empid = #{id}
+		update employee set deptid = #{department.deptid}, name = #{name}, sex = #{sex}, age = #{age}, fired = #{fired}, vacation = #{leave} where empid = #{id}
 	</update>
 
 	<delete id="delete" parameterType="Employee">
