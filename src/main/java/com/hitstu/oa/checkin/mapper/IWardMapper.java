@@ -9,7 +9,6 @@ import com.hitstu.oa.checkin.model.WardModel;
 @Mapper
 public interface IWardMapper {
 
-	//只增加
 	public void insert(WardModel wardModel) throws Exception;
 	
 	public void delete(WardModel wardModel) throws Exception;

@@ -88,6 +88,4 @@ public class WardController {
 		return result;
 	}
 	
-	
-	
 }
