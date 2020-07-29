@@ -122,13 +122,14 @@ public class EmployeeController {
 	public Result<EmployeeModel> getListByConditionWithDepartmentWithPage(@RequestParam(required = false, defaultValue = "10") int rows, 
 			@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "0")int lowAge, 
 			@RequestParam(required = false, defaultValue = "0")int highAge, @RequestParam(required = false, defaultValue = "")String sex,
-			@RequestParam(required = false, defaultValue = "")String nameKey) throws Exception {
+			@RequestParam(required = false, defaultValue = "")String nameKey,@RequestParam(required = false, defaultValue = "")String leave,
+			@RequestParam(required = false, defaultValue = "")String fired) throws Exception {
 		Result<EmployeeModel> result = new Result<>();
 		result.setPage(page);
 		result.setRows(rows);
 		result.setCount(employeeService.getCountByAll());
 		result.setPageCount(employeeService.getPageCountByAll(rows));
-		result.setList(employeeService.getListByConditionWithDepartmentWithPage(rows, page, lowAge, highAge, sex, nameKey));
+		result.setList(employeeService.getListByConditionWithDepartmentWithPage(rows, page, lowAge, highAge, sex, nameKey, leave, fired));
 		result.setStatus("OK");
 		result.setMessage("取得特定员工信息(带部门)成功");
 		return result;

@@ -52,10 +52,10 @@ public interface IEmployeeMapper {
 	// 按综合条件检索员工列表，分页模式，取关联的部门属性对象
 	public List<EmployeeModel> selectListByConditionWithDepartmentWithPage(@Param("start") int start,
 			@Param("rows") int rows, @Param("lowAge") int lowAge, @Param("highAge") int highAge,
-			@Param("sex") String sex, @Param("nameKey") String nameKey) throws Exception;
+			@Param("sex") String sex, @Param("nameKey") String nameKey, @Param("leave") String leave,@Param("fired") String fired) throws Exception;
 
 	// 按综合条件检索员工个数
 	public int selectCountByCondition(@Param("start") int start, @Param("rows") int rows,
 			@Param("lowAge") int lowAge, @Param("highAge") int highAge,
-			@Param("sex") String sex, @Param("nameKey") String nameKey) throws Exception;
+			@Param("sex") String sex, @Param("nameKey") String nameKey, @Param("leave") String leave,@Param("fired") String fired) throws Exception;
 }

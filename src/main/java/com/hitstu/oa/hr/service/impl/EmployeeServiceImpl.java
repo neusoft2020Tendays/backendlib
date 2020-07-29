@@ -93,18 +93,30 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public List<EmployeeModel> getListByConditionWithDepartmentWithPage(int rows, int page, int lowAge, int highAge,
-			String sex, String nameKey) throws Exception {
+			String sex, String nameKey, String leave, String fired) throws Exception {
 		sex = getSex(sex);
 		nameKey = getNameKey(nameKey);
-		return employeeMapper.selectListByConditionWithDepartmentWithPage(rows*(page-1), rows, lowAge, highAge, sex, nameKey);
+		if (leave != null) {
+			leave = leave.trim();
+		}
+		if (fired != null) {
+			fired = fired.trim();
+		}
+		return employeeMapper.selectListByConditionWithDepartmentWithPage(rows*(page-1), rows, lowAge, highAge, sex, nameKey, leave, fired);
 	}
 
 	@Override
-	public int getCountByCondition(int rows, int page, int lowAge, int highAge, String sex, String nameKey)
+	public int getCountByCondition(int rows, int page, int lowAge, int highAge, String sex, String nameKey, String leave, String fired)
 			throws Exception {
 		sex = getSex(sex);
 		nameKey = getNameKey(nameKey);
-		return employeeMapper.selectCountByCondition(rows*(page - 1), rows, lowAge, highAge, sex, nameKey);
+		if (leave != null) {
+			leave = leave.trim();
+		}
+		if (fired != null) {
+			fired = fired.trim();
+		}
+		return employeeMapper.selectCountByCondition(rows*(page - 1), rows, lowAge, highAge, sex, nameKey, leave, fired);
 	}
 
 	@Override

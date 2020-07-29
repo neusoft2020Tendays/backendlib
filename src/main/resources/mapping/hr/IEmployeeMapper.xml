@@ -6,9 +6,9 @@
 
 	<resultMap id="EmployeeResultMap" type="Employee">
 		<id property="id" column="empid" />
-		<result property="name" column="name" />
-		<result property="sex" column="sex" />
-		<result property="age" column="age" />
+		<result property="name" column="empname" />
+		<result property="sex" column="empsex" />
+		<result property="age" column="empage" />
 		<result property="fired" column="fired" />
 		<result property="leave" column="vacation" />
 	</resultMap>
@@ -25,7 +25,7 @@
 	</insert>
 
 	<update id="update" parameterType="Employee">
-		update employee set deptid = #{department.deptid}, name = #{name}, sex = #{sex}, age = #{age}, fired = #{fired}, vacation = #{leave} where empid = #{id}
+		update employee set deptid = #{department.deptid}, empname = #{name}, empsex = #{sex}, empage = #{age}, fired = #{fired}, vacation = #{leave} where empid = #{id}
 	</update>
 
 	<delete id="delete" parameterType="Employee">
@@ -59,7 +59,7 @@
     </select>
     
     <select id="selectByAllWithDepartment" resultMap="EmployeeResultMapWithDepartment">
-        select a.*, b.* from employee a inner join department b on a.deptid = b.deptid
+        select a.*, b.* from employee a left outer join department b on a.deptid = b.deptid
     </select>
     
     <select id="selectByAllWithDepartmentWithPage" resultMap="EmployeeResultMapWithDepartment">
@@ -72,24 +72,32 @@
         <where/>
 
         <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
-            and a.age &gt;= #{lowAge}
-            and a.age &lt;= #{highAge}
+            and a.empage &gt;= #{lowAge}
+            and a.empage &lt;= #{highAge}
         </if>
         
         <if test="highAge &gt; 0 and lowAge &lt;= 0">
-            and a.age &lt;= #{highAge}
+            and a.empage &lt;= #{highAge}
         </if>
         
         <if test="highAge &lt;= 0 and lowAge &gt; 0">
-            and a.age &gt;= #{lowAge}
+            and a.empage &gt;= #{lowAge}
         </if>
         
         <if test="nameKey != null and nameKey != '' ">
-            and a.name like #{nameKey}
+            and a.empname like #{nameKey}
         </if>
         
         <if test="sex != null and sex != ''">
-            and a.sex = #{sex}
+            and a.empsex = #{sex}
+        </if>
+        
+        <if test="fired != null and fired != ''">
+            and a.fired = #{fired}
+        </if>
+        
+        <if test="leave != null and leave != ''">
+            and a.vacation = #{leave}
         </if>
         limit ${start}, #{rows}
     </select>
@@ -99,24 +107,33 @@
         <where/>
 
         <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
-            and a.age &gt;= #{lowAge}
-            and a.age &lt;= #{highAge}
+            and a.empage &gt;= #{lowAge}
+            and a.empage &lt;= #{highAge}
         </if>
         
         <if test="highAge &gt; 0 and lowAge &lt;= 0">
-            and a.age &lt;= #{highAge}
+            and a.empage &lt;= #{highAge}
         </if>
         
         <if test="highAge &lt;= 0 and lowAge &gt; 0">
-            and a.age &gt;= #{lowAge}
+            and a.empage &gt;= #{lowAge}
         </if>
         
         <if test="nameKey != null and nameKey != '' ">
-            and a.name like #{nameKey}
+            and a.empname like #{nameKey}
         </if>
         
         <if test="sex != null and sex != ''">
-            and a.sex = #{sex}
+            and a.empsex = #{sex}
         </if>
+        
+        <if test="fired != null and fired != ''">
+            and a.fired = #{fired}
+        </if>
+        
+        <if test="leave != null and leave != ''">
+            and a.vacation = #{leave}
+        </if>
+        
     </select>
 </mapper>
