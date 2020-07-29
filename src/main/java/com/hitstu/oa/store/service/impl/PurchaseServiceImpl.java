@@ -1,5 +1,6 @@
 package com.hitstu.oa.store.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,10 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<PurchaseModel> getByAll() throws Exception {
 		return purchaseMapper.selectByAll();
 	}
-
+	
 	@Override
-	public PurchaseModel getById(String id) throws Exception {
-		return purchaseMapper.selectById(id);
+	public PurchaseModel getByIdAndDate(String id, Date date) throws Exception {
+		return purchaseMapper.selectByIdAndDate(id, date);
 	}
 
 	@Override
@@ -67,5 +68,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 		return pageCount;
 	}
+
+	
 
 }

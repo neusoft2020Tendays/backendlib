@@ -1,5 +1,6 @@
 package com.hitstu.oa.store.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.hitstu.oa.store.model.PurchaseModel;
@@ -13,7 +14,7 @@ public interface IPurchaseService {
 
 	public List<PurchaseModel> getByAll() throws Exception;
 
-	public PurchaseModel getById(String id) throws Exception;
+	public PurchaseModel getByIdAndDate(String id, Date date) throws Exception;
 
 	public List<PurchaseModel> getByAllWithPage(int rows, int page) throws Exception;
 

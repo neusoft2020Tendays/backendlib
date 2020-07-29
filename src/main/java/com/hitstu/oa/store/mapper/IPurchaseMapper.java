@@ -1,5 +1,6 @@
 package com.hitstu.oa.store.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,7 +18,7 @@ public interface IPurchaseMapper {
 
 	public List<PurchaseModel> selectByAll() throws Exception;
 
-	public PurchaseModel selectById(String id) throws Exception;
+	public PurchaseModel selectByIdAndDate(String id, Date date) throws Exception;
 
 	public List<PurchaseModel> selectByAllWithPage(int start, int rows) throws Exception;
 

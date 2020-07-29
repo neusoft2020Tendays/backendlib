@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 public class PurchaseModel implements Serializable {
 	private String goodsid = null;
 	private Date date = null;
-	private double amount = 0;
+	private double puramount = 0;
 
 	public String getGoodsid() {
 		return goodsid;
@@ -28,11 +28,11 @@ public class PurchaseModel implements Serializable {
 	}
 
 	public double getAmount() {
-		return amount;
+		return puramount;
 	}
 
 	public void setAmount(double amount) {
-		this.amount = amount;
+		this.puramount = amount;
 	}
 
 }
