@@ -5,22 +5,26 @@
 <mapper namespace="com.hitstu.oa.checkin.mapper.IElderlyMapper">
 	<!-- 老人查询基础映射，不包含关联属性 -->
 	<resultMap id="ElderlyResultMap" type="Elderly">
-		<id property="elderlyId" column="elderlyid" />
-		<result property="bedid" column="bedid" />
-		<result property="sex" column="sex" />
-		<result property="age" column="age" />
+		<id property="elderlyid" column="elderlyid" />
+		<result property="eldername" column="eldername" />
+		<result property="eldersex" column="eldersex" />
+		<result property="elderage" column="elderage" />
+		<result property="floor" column="floor" />
+		<result property="room" column="room" />
+		<result property="bed" column="bed" />
+
 	</resultMap>
 
 	<insert id="insert" parameterType="Elderly">
 		insert into elderly
-		(elderlyid, sex, age)
+		(elderlyid, eldername, eldersex, elderage, floor, room, bed)
 		values
-		(#{elderlyId},#{sex},#{age})
+		(#{elderlyid},#{eldername},#{eldersex},#{elderage},#{floor},#{room},#{bed})
 	</insert>
 
 	<update id="update">
 		update elderly set
-		bedid=#{bed.bedid},sex=#{sex},age=#{age}
+		eldername=#{eldername},eldersex=#{eldersex},elderage=#{elderage},floor=#{floor},room=#{room},bed=#{bed}
 		where elderlyid=#{elderlyid}
 	</update>
 
@@ -42,9 +46,10 @@
 		select * from elderly
 		limit #{start}, #{rows}
 	</select>
-	
+
 	<select id="selectCountByAll" resultType="_int">
-		select count(*) from elderly
+		select count(*) from
+		elderly
 	</select>
 
 
