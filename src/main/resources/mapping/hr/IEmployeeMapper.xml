@@ -48,6 +48,10 @@
 	<select id="selectCountByAll" resultType="_int">
 		select count(*) from employee
 	</select>
+	
+	<select id="selectCountByDepartment" resultType="_int">
+	   select count(*) from employee where deptid = #{deptid}
+	</select>
     
     <select id="selectByIdWithDepartment" resultMap="EmployeeResultMapWithDepartment">
         select a.*, b.* from employee a inner join department b on a.deptid = b.deptid

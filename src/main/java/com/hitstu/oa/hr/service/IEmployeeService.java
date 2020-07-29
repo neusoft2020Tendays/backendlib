@@ -29,6 +29,9 @@ public interface IEmployeeService {
 	
 	// 根据行数确定总页数
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	// 根据部门获取员工数目
+	public int getCountByDepartment(String deptid) throws Exception;
 
 	// 取得指定员工对象，带部门
 	public EmployeeModel getByIdWithDepartment(String id) throws Exception;

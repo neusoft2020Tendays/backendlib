@@ -106,4 +106,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		nameKey = getNameKey(nameKey);
 		return employeeMapper.selectCountByCondition(rows*(page - 1), rows, lowAge, highAge, sex, nameKey);
 	}
+
+	@Override
+	public int getCountByDepartment(String deptid) throws Exception {
+		return employeeMapper.selectCountByDepartment(deptid);
+	}
 }

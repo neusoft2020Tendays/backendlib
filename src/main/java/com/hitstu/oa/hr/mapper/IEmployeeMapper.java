@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.hitstu.oa.hr.model.DepartmentModel;
 import com.hitstu.oa.hr.model.EmployeeModel;
 
 @Mapper
@@ -31,6 +32,9 @@ public interface IEmployeeMapper {
 	
 	// 取得全部员工数目
 	public int selectCountByAll() throws Exception;
+	
+	// 取得特定部门的员工数目
+	public int selectCountByDepartment(String deptid) throws Exception;
 		
 	// 取得指定员工对象，带部门
 	public EmployeeModel selectByIdWithDepartment(String id) throws Exception;
