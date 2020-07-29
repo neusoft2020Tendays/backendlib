@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 public class DepartmentModel implements Serializable {
 
 	private String deptid = null;
-	private String deptname = null;
+	private String name = null;
 
 	public String getDeptid() {
 		return deptid;
@@ -19,11 +19,11 @@ public class DepartmentModel implements Serializable {
 	}
 
 	public String getName() {
-		return deptname;
+		return name;
 	}
 
 	public void setName(String name) {
-		this.deptname = name;
+		this.name = name;
 	}
 
 }
