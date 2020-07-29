@@ -14,7 +14,7 @@ public interface IConsumeService {
 
 	public List<ConsumeModel> getByAll() throws Exception;
 
-	public ConsumeModel getById(String id, Date date) throws Exception;
+	public ConsumeModel getById(String id, String date) throws Exception;
 
 	public List<ConsumeModel> getByAllWithPage(int rows, int page) throws Exception;
 

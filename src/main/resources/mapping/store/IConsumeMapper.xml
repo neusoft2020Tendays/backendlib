@@ -33,7 +33,7 @@
 
 	<select id="selectById" resultMap="ConsumeResultMap">
 		select * from consume
-		where goodsid=#{id} and date=#{date}
+		where goodsid=#{id} and DATE_FORMAT(date, '%Y%m%d')=#{date}
 	</select>
 
 	<select id="selectByAllWithPage" resultMap="ConsumeResultMap">

@@ -18,7 +18,7 @@ public interface IConsumeMapper {
 
 	public List<ConsumeModel> selectByAll() throws Exception;
 
-	public ConsumeModel selectById(@Param("id")String id, @Param("date")Date date) throws Exception;
+	public ConsumeModel selectById(@Param("id")String id, @Param("date")String date) throws Exception;
 
 	public List<ConsumeModel> selectByAllWithPage(@Param("start")int start, @Param("rows")int rows) throws Exception;
 

@@ -1,5 +1,7 @@
 package com.hitstu.oa.store.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,11 +81,13 @@ public class ConsumeController {
 	
 	@GetMapping("/get")
 	public Result<ConsumeModel> getById(@RequestParam(required = true) String id, 
-			@RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") Date date) throws Exception {
+			@RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date) throws Exception {
 		Result<ConsumeModel> result = new Result<>();
-		result.setResult(consumeService.getById(id, date));
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		result.setResult(consumeService.getById(id, dateFormat.format(date)));
 		result.setStatus("OK");
 		result.setMessage("取得特定货品单成功");
+//		org.apache.ibatis.type.JdbcType.DATETIMEOFFSET
 		return result;
 	}
 }

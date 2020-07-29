@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Alias("Consume")
 public class ConsumeModel {
 	private String id = null;
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="UTC")
 	private Date date = null;
 	private double amount = 0;
 	public String getId() {

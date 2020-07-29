@@ -43,7 +43,7 @@ public class ConsumeServiceImpl implements IConsumeService {
 	}
 
 	@Override
-	public ConsumeModel getById(String id, Date date) throws Exception {
+	public ConsumeModel getById(String id, String date) throws Exception {
 		return consumeMapper.selectById(id, date);
 	}
 
