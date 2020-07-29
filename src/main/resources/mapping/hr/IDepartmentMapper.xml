@@ -6,19 +6,19 @@
 	<!-- 部门查询基础映射，不包含关联属性 -->
 	<resultMap id="DepartmentResultMap" type="Department">
 		<id property="deptid" column="deptid" />
-		<result property="name" column="name" />
+		<result property="deptname" column="deptname" />
 	</resultMap>
 
 	<insert id="insert" parameterType="Department">
 		insert into department
-		(deptid, name)
+		(deptid, deptname)
 		values
-		(#{deptid},#{name})
+		(#{deptid},#{deptname})
 	</insert>
 
 	<update id="update">
 		update department set
-		name=#{name} where
+		deptname=#{deptname} where
 		deptid=#{deptid}
 	</update>
 
