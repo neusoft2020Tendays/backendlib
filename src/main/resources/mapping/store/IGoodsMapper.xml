@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.store.mapper.IGoodsMapper">
+
+	<resultMap id="GoodsResultMap" type="com.hitstu.oa.store.model.GoodsModel">
+		<id property="id" column="goodsid" />
+		<result property="name" column="goodsname" />
+		<result property="price" column="price" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.hitstu.oa.store.model.GoodsModel">
+		insert into goods
+		(goodsid, goodsname, price)
+		values
+		(#{id}, #{name}, #{price})
+	</insert>
+
+	<update id="update">
+		update goods set
+		goodsname =#{name} , price = #{price}
+		where goodsid=#{id}
+	</update>
+
+	<delete id="delete">
+		delete from goods where goodsid=#{id} 
+	</delete>
+
+	<select id="selectByAll" resultMap="GoodsResultMap">
+		select * from goods
+	</select>
+
+	<select id="selectById" resultMap="GoodsResultMap">
+		select * from goods
+		where goodsid=#{id} 
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="GoodsResultMap">
+		select * from goods
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from goods
+	</select>
+	
+</mapper>
