@@ -11,7 +11,7 @@ spring:
  
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
-  type-aliases-package: com.hitstu.oa.hr.model, com.hitstu.oa.checkin.model
+  type-aliases-package: com.hitstu.oa.hr.model, com.hitstu.oa.checkin.model, com.hitstu.oa.store.model
  
 #showSql
 logging:
