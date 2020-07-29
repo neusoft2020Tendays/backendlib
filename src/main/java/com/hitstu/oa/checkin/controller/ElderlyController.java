@@ -60,10 +60,29 @@ public class ElderlyController {
 
 	@PostMapping(value = "/modify")
 	public Result<String> modify(@RequestBody ElderlyModel elderlyModel) throws Exception {
-		elderlyService.modify(elderlyModel);
 		Result<String> result = new Result<>();
-		result.setStatus("OK");
-		result.setMessage("修改老人成功！");
+		result.setStatus("ERROR");		
+		if (!elderlyModel.getEldersex().equals("男") && !elderlyModel.getEldersex().equals("女")) {
+			result.setMessage("性别必须为“男”或“女”");
+		} else if (!new HashSet<>(wardService.getFloorByAll()).contains(elderlyModel.getFloor())) {
+			result.setMessage("楼层 " + elderlyModel.getFloor() + " 不存在！");
+		} else if (new HashSet<>(wardService.getFloorByAll()).contains(elderlyModel.getFloor())
+				&& !new HashSet<>(wardService.getRoomByFloor(elderlyModel.getFloor()))
+						.contains(elderlyModel.getRoom())) {
+			result.setMessage("楼层 " + elderlyModel.getFloor() + " 的房间 " + elderlyModel.getRoom() + " 不存在！");
+		} else if (new HashSet<>(wardService.getFloorByAll()).contains(elderlyModel.getFloor())
+				&& new HashSet<>(wardService.getRoomByFloor(elderlyModel.getFloor())).contains(elderlyModel.getRoom())
+				&& !new HashSet<>(wardService.getWardByFloorAndRoom(elderlyModel.getFloor(), elderlyModel.getRoom()))
+						.contains(elderlyModel.getBed())) {
+			result.setMessage("楼层 " + elderlyModel.getFloor() + " 的房间  " + elderlyModel.getRoom() + " 中的床位号 "
+					+ elderlyModel.getBed() + " 不存在！");
+		} else if (elderlyModel.getElderage() <= 0 || elderlyModel.getElderage() >= 150) {
+			result.setMessage("年龄 " + elderlyModel.getElderage() + " 不合法！");
+		} else {
+			elderlyService.modify(elderlyModel);
+			result.setStatus("OK");
+			result.setMessage("增加老人成功！");
+		}
 		return result;
 	}
 
