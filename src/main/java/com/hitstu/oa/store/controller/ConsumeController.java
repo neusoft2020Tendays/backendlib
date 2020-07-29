@@ -10,7 +10,7 @@ import com.hitstu.oa.store.service.IConsumeService;
 @RestController
 @RequestMapping("/consume")
 @CrossOrigin(origins = {"*","null"})
-public class ConsumeCtroller {
+public class ConsumeController {
 	@Autowired
 	private IConsumeService consumeService = null;
 	

@@ -15,16 +15,17 @@ import com.hitstu.oa.restresult.Result;
 
 @RestController
 @RequestMapping(value = "/department")
-@CrossOrigin(origins = {"*", "null"})
+@CrossOrigin(origins = { "*", "null" })
 public class DepartmentController {
 
 	@Autowired
 	private IDepartmentService departmentService = null;
 
-	@PostMapping(value="/add")
+	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody DepartmentModel departmentModel) throws Exception {
 		Result<String> result = new Result<>();
-		if (this.getById(departmentModel.getDeptid()) != null) {
+		Result<DepartmentModel> search = this.getById(departmentModel.getDeptid());
+		if (search != null && search.getResult() != null) {
 			result.setStatus("ERROR");
 			result.setMessage("部门" + departmentModel.getDeptid() + "已存在！");
 		} else {
@@ -35,18 +36,18 @@ public class DepartmentController {
 		return result;
 	}
 
-	@PostMapping(value="/modify")
+	@PostMapping(value = "/modify")
 	public Result<String> modify(@RequestBody DepartmentModel departmentModel) throws Exception {
 		Result<String> result = new Result<>();
-		departmentService.modify(departmentModel);		
+		departmentService.modify(departmentModel);
 		System.out.println(departmentModel.getDeptid());
 		System.out.println(departmentModel.getName());
 		result.setStatus("OK");
-		result.setMessage("修改部门成功！");		
+		result.setMessage("修改部门成功！");
 		return result;
 	}
 
-	@PostMapping(value="/delete")
+	@PostMapping(value = "/delete")
 	public Result<String> delete(@RequestBody DepartmentModel departmentModel) throws Exception {
 		departmentService.delete(departmentModel);
 		Result<String> result = new Result<>();
@@ -56,7 +57,7 @@ public class DepartmentController {
 	}
 
 	// 取得部门列表，分页模式
-	@GetMapping(value="/list/all/page")
+	@GetMapping(value = "/list/all/page")
 	public Result<DepartmentModel> getListByAllWithPage(@RequestParam(required = false, defaultValue = "5") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 		Result<DepartmentModel> result = new Result<>();
@@ -74,8 +75,13 @@ public class DepartmentController {
 	public Result<DepartmentModel> getById(@RequestParam(required = true) String id) throws Exception {
 		Result<DepartmentModel> result = new Result<>();
 		result.setResult(departmentService.getById(id));
-		result.setStatus("OK");
-		result.setMessage("部门列表分页方式成功！");
+		if (result.getResult() == null) {
+			result.setStatus("ERROR");
+			result.setMessage("部门" + id + "不存在！");
+		} else {
+			result.setStatus("OK");
+			result.setMessage("部门列表分页方式成功！");
+		}
 		return result;
 	}
 
