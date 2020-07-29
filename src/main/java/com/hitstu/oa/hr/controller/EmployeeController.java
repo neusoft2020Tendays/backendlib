@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.hitstu.oa.checkin.model.BedModel;
 import com.hitstu.oa.hr.model.EmployeeModel;
 import com.hitstu.oa.hr.service.IEmployeeService;
 import com.hitstu.oa.restresult.Result;
@@ -56,12 +54,22 @@ public class EmployeeController {
 		result.setCount(employeeService.getCountByAll());
 		result.setList(employeeService.getByAll());
 		result.setStatus("OK");
-		result.setMessage("取得全部床位成功");
+		result.setMessage("取得全部员工信息(无部门)成功");
+		return result;
+	}
+	
+	@GetMapping("/listAllWithDepartment")
+	public Result<EmployeeModel> getListByAllWithDepartment() throws Exception {
+		Result<EmployeeModel> result = new Result<>();
+		result.setCount(employeeService.getCountByAll());
+		result.setList(employeeService.getByAllWithDepartment());
+		result.setStatus("OK");
+		result.setMessage("取得全部员工信息(带部门)成功");
 		return result;
 	}
 
-	@GetMapping("/listAllPage")
-	public Result<EmployeeModel> getListByAllWithPage(@RequestParam(required = false, defaultValue = "10") int rows,
+	@GetMapping("/listPage")
+	public Result<EmployeeModel> getListWithPage(@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 		
 		Result<EmployeeModel> result = new Result<>();
@@ -71,7 +79,22 @@ public class EmployeeController {
 		result.setPage(page);
 		result.setList(employeeService.getByAllWithPage(rows, page));
 		result.setStatus("OK");
-		result.setMessage("取得分页床位成功");
+		result.setMessage("取得分页全部员工信息(无部门)成功");
+		return result;
+	}
+	
+	@GetMapping("/listPageWithDepartment")
+	public Result<EmployeeModel> getListWithPageWithDepartment(@RequestParam(required = false, defaultValue = "10") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
+		
+		Result<EmployeeModel> result = new Result<>();
+		result.setCount(employeeService.getCountByAll());
+		result.setPage(employeeService.getPageCountByAll(rows));
+		result.setRows(rows);
+		result.setPage(page);
+		result.setList(employeeService.getByAllWithDepartmentWithPage(rows, page));
+		result.setStatus("OK");
+		result.setMessage("取得分页员工信息(带部门)成功");
 		return result;
 	}
 	
@@ -81,7 +104,33 @@ public class EmployeeController {
 		Result<EmployeeModel> result = new Result<>();
 		result.setResult(employeeService.getById(id));
 		result.setStatus("OK");
-		result.setMessage("取得特定床位成功");
+		result.setMessage("取得特定员工信息(无部门)成功");
+		return result;
+	}
+	
+	@GetMapping("/getWithDepartment")
+	public Result<EmployeeModel> getByIdWithDepartment(@RequestParam(required = true) String id) throws Exception {
+		Result<EmployeeModel> result = new Result<>();
+		result.setResult(employeeService.getByIdWithDepartment(id));
+		result.setStatus("OK");
+		result.setMessage("取得特定员工信息(带部门)成功");
+		return result;
+	}
+	
+	
+	@GetMapping("/listPageByConditionWithDepartment")
+	public Result<EmployeeModel> getListByConditionWithDepartmentWithPage(@RequestParam(required = false, defaultValue = "10") int rows, 
+			@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "0")int lowAge, 
+			@RequestParam(required = false, defaultValue = "0")int highAge, @RequestParam(required = false, defaultValue = "")String sex,
+			@RequestParam(required = false, defaultValue = "")String nameKey) throws Exception {
+		Result<EmployeeModel> result = new Result<>();
+		result.setPage(page);
+		result.setRows(rows);
+		result.setCount(employeeService.getCountByAll());
+		result.setPageCount(employeeService.getPageCountByAll(rows));
+		result.setList(employeeService.getListByConditionWithDepartmentWithPage(rows, page, lowAge, highAge, sex, nameKey));
+		result.setStatus("OK");
+		result.setMessage("取得特定员工信息(带部门)成功");
 		return result;
 	}
 	
@@ -93,4 +142,5 @@ public class EmployeeController {
 		result.setMessage("根据部门ID获取员工数成功");
 		return result;
 	}
+	
 }

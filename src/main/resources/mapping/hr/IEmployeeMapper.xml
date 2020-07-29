@@ -16,7 +16,7 @@
     <resultMap type="Employee" id="EmployeeResultMapWithDepartment" 
     extends="EmployeeResultMap">
        <association property="department" 
-       resultMap="com.hitstu.oa.checkin.mapper.IDepartmentMapper.DepartmentResultMap"></association>
+       resultMap="com.hitstu.oa.hr.mapper.IDepartmentMapper.DepartmentResultMap"></association>
     </resultMap>
 
 	<insert id="insert" parameterType="Employee">
@@ -68,7 +68,7 @@
     </select>
     
     <select id="selectListByConditionWithDepartmentWithPage" resultMap="EmployeeResultMapWithDepartment">
-        select * from employee a inner join department b on a.deptid = b.depetid 
+        select a.*,b.* from employee a inner join department b on a.deptid = b.deptid 
         <where/>
 
         <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
