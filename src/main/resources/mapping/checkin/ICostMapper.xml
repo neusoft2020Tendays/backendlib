@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.checkin.mapper.ICostMapper">
+	<!-- Cost查询基础映射，不包含关联属性 -->
+	<resultMap id="CostResultMap" type="Cost">
+		<id property="costId" column="costid" />
+		<result property="costAmount" column="costamount" />
+		<result property="time" column="time" />
+	</resultMap>
+
+	<!-- Cost查询映射，包含关联属性ElderlyModel -->
+	<resultMap id="CostWithElderlyResultMap" type="Cost" extends="CostResultMap">
+		<association property="elderly" resultMap="com.hitstu.oa.checkin.mapper.IElderlyMapper.ElderlyResultMap"></association>
+	</resultMap>
+	
+	<insert id="insert" parameterType="Cost">
+		insert into cost
+		(costid, costamount, time, elderlyid)
+		values
+		(#{costId}, #{costAmount}, #{time}, #{elderly.elderlyid})
+	</insert>
+
+	<update id="update">
+		update cost set
+		elderlyid=#{elderly.elderlyid},costamount=#{costAmount},time=#{time}
+		where costid=#{costId}
+	</update>
+
+	<delete id="delete" parameterType="Cost">
+		delete from cost where costid=#{costId}
+	</delete>
+
+	<select id="selectByAll" resultMap="CostWithElderlyResultMap">
+		select a.*,b.* from cost a inner join elderly b on a.elderlyid=b.elderlyid
+	</select>
+
+	<select id="selectById" resultMap="CostWithElderlyResultMap">
+		select a.*,b.* from cost a inner join elderly b on a.elderlyid=b.elderlyid
+		where costid=#{costId}
+	</select>
+	
+	<select id="selectByElderlyWithPage" resultMap="CostResultMap">
+		select * from cost
+		where elderlyid=#{id}
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByElderly" resultType="_int">
+		select count(*) from cost
+		where elderlyid=#{id}
+	</select>
+	
+</mapper>
