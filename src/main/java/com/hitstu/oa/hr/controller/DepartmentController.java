@@ -22,26 +22,33 @@ public class DepartmentController {
 	private IDepartmentService departmentService = null;
 
 	@PostMapping(value="/add")
-	public Result<String> add(@RequestBody DepartmentModel DepartmentModel) throws Exception {
-		departmentService.add(DepartmentModel);
+	public Result<String> add(@RequestBody DepartmentModel departmentModel) throws Exception {
 		Result<String> result = new Result<>();
-		result.setStatus("OK");
-		result.setMessage("增加部门成功！");
+		if (this.getById(departmentModel.getDeptid()) != null) {
+			result.setStatus("ERROR");
+			result.setMessage("部门" + departmentModel.getDeptid() + "已存在！");
+		} else {
+			departmentService.add(departmentModel);
+			result.setStatus("OK");
+			result.setMessage("增加部门成功！");
+		}
 		return result;
 	}
 
 	@PostMapping(value="/modify")
-	public Result<String> modify(@RequestBody DepartmentModel DepartmentModel) throws Exception {
-		departmentService.modify(DepartmentModel);
+	public Result<String> modify(@RequestBody DepartmentModel departmentModel) throws Exception {
 		Result<String> result = new Result<>();
+		departmentService.modify(departmentModel);		
+		System.out.println(departmentModel.getDeptid());
+		System.out.println(departmentModel.getName());
 		result.setStatus("OK");
-		result.setMessage("修改部门成功！");
+		result.setMessage("修改部门成功！");		
 		return result;
 	}
 
 	@PostMapping(value="/delete")
-	public Result<String> delete(@RequestBody DepartmentModel DepartmentModel) throws Exception {
-		departmentService.delete(DepartmentModel);
+	public Result<String> delete(@RequestBody DepartmentModel departmentModel) throws Exception {
+		departmentService.delete(departmentModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
 		result.setMessage("删除部门成功！");
@@ -59,7 +66,7 @@ public class DepartmentController {
 		result.setPage(page);
 		result.setList(departmentService.getByAllWithPage(rows, page));
 		result.setStatus("OK");
-		result.setMessage("删除部门列表分页方式成功！");
+		result.setMessage("部门列表分页方式成功！");
 		return result;
 	}
 
@@ -68,7 +75,7 @@ public class DepartmentController {
 		Result<DepartmentModel> result = new Result<>();
 		result.setResult(departmentService.getById(id));
 		result.setStatus("OK");
-		result.setMessage("删除部门列表分页方式成功！");
+		result.setMessage("部门列表分页方式成功！");
 		return result;
 	}
 
