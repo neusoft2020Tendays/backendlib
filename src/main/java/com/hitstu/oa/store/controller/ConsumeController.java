@@ -79,6 +79,21 @@ public class ConsumeController {
 		return result;
 	}
 	
+	@GetMapping("/listAllPageWithGoods")
+	public Result<ConsumeModel> getListByAllWithPageWithGoods(@RequestParam(required = false, defaultValue = "10") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
+		
+		Result<ConsumeModel> result = new Result<>();
+		result.setCount(consumeService.getCountByAll());
+		result.setPageCount(consumeService.getPageCountByAll(rows));
+		result.setRows(rows);
+		result.setPage(page);
+		result.setList(consumeService.getByAllWithPage(rows, page));
+		result.setStatus("OK");
+		result.setMessage("取得分页货物使用信息成功");
+		return result;
+	}
+	
 	@GetMapping("/get")
 	public Result<ConsumeModel> getById(@RequestParam(required = true) String id, 
 			@RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date) throws Exception {
@@ -90,4 +105,6 @@ public class ConsumeController {
 //		org.apache.ibatis.type.JdbcType.DATETIMEOFFSET
 		return result;
 	}
+	
+	
 }
