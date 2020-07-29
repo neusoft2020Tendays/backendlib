@@ -3,6 +3,7 @@ package com.hitstu.oa.store.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,7 +68,7 @@ public class ConsumeController {
 		
 		Result<ConsumeModel> result = new Result<>();
 		result.setCount(consumeService.getCountByAll());
-		result.setPage(consumeService.getPageCountByAll(rows));
+		result.setPageCount(consumeService.getPageCountByAll(rows));
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(consumeService.getByAllWithPage(rows, page));
@@ -77,12 +78,12 @@ public class ConsumeController {
 	}
 	
 	@GetMapping("/get")
-	public Result<ConsumeModel> getById(@RequestParam(required = true) String id, @RequestParam(required = true) Date date) throws Exception {
-		
+	public Result<ConsumeModel> getById(@RequestParam(required = true) String id, 
+			@RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") Date date) throws Exception {
 		Result<ConsumeModel> result = new Result<>();
 		result.setResult(consumeService.getById(id, date));
 		result.setStatus("OK");
-		result.setMessage("取得特定床位成功");
+		result.setMessage("取得特定货品单成功");
 		return result;
 	}
 }
