@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.store.mapper.IConsumeMapper">
+	<!-- 房间查询基础映射，不包含关联属性 -->
+	<resultMap id="ConsumeResultMap" type="Consume">
+		<id property="id" column="goodsid" />
+		<result property="date" column="date" />
+		<result property="amount" column="consamount" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Consume">
+		insert into consume
+		(goodsid, date, consamount)
+		values
+		(#{id}, #{date}, #{amount})
+	</insert>
+
+	<update id="update">
+		update consume set
+		consamount=#{amount}
+		where goodsid=#{id} and date=#{date}
+	</update>
+
+	<delete id="delete" parameterType="Consume">
+		delete from consume where goodsid=#{id} and date=#{date}
+	</delete>
+
+	<select id="selectByAll" resultMap="ConsumeResultMap">
+		select * from consume
+	</select>
+
+	<select id="selectById" resultMap="ConsumeResultMap">
+		select * from consume
+		where
+		goodsid=#{id} and date=#{date}
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="ConsumeResultMap">
+		select * from consume
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from consume
+	</select>
+	
+</mapper>

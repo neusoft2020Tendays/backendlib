@@ -1,5 +1,6 @@
 package com.hitstu.oa.store.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class ConsumeServiceImpl implements IConsumeService {
 	}
 
 	@Override
-	public ConsumeModel getById(String id) throws Exception {
-		return consumeMapper.selectById(id);
+	public ConsumeModel getById(String id, Date date) throws Exception {
+		return consumeMapper.selectById(id, date);
 	}
 
 	@Override
