@@ -71,7 +71,7 @@ public class WardController {
 		return result;
 	}
 	
-	@GetMapping(value = "/wards")
+	@GetMapping(value = "/bed")
 	public Result<String> getById(@RequestParam(required = true) String floor
 			,@RequestParam(required = true) String room) throws Exception {
 		Result<String> result = new Result<>();
