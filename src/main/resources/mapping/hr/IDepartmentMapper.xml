@@ -48,5 +48,10 @@
 		department
 	</select>
 
+	<select id="selectDeptidByAll" resultType="String">
+		select distinct
+		deptid from department
+	</select>
+
 
 </mapper>

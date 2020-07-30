@@ -68,4 +68,9 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		return pageCount;
 	}
 
+	@Override
+	public List<String> getDeptidByAll() throws Exception {
+		return this.departmentMapper.selectDeptidByAll();
+	}
+
 }
