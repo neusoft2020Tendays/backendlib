@@ -5,13 +5,13 @@ server:
 spring:
   datasource:
     username: root
-    password: 654321
-    url: jdbc:mysql://localhost:3319/tendays?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: maria123456
+    url: jdbc:mysql://localhost:3333/tendays?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
  
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
-  type-aliases-package: com.hitstu.oa.hr.model, com.hitstu.oa.checkin.model, com.hitstu.oa.store.model
+  type-aliases-package: com.hitstu.oa.hr.model, com.hitstu.oa.checkin.model, com.hitstu.oa.store.model, com.hitstu.oa.admin.model
  
 #showSql
 logging:

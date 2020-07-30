@@ -6,7 +6,7 @@
 	<!-- 房间查询基础映射，不包含关联属性 -->
 	<resultMap id="ConsumeResultMap" type="Consume">
 		<id property="id" column="goodsid" />
-		<result property="date" column="date" />
+		<id property="date" column="date" />
 		<result property="amount" column="consamount" />
 	</resultMap>
 

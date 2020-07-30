@@ -1,12 +1,9 @@
 package com.hitstu.oa.hr.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import com.hitstu.oa.hr.model.DepartmentModel;
 import com.hitstu.oa.hr.model.EmployeeModel;
 
 @Mapper

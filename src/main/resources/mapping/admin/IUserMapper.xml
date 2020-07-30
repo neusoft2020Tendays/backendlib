@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.admin.mapper.IUserMapper">
+	<!-- Cost查询基础映射，不包含关联属性 -->
+	<resultMap id="UserResultMap" type="User">
+		<id property="id" column="userid" />
+		<result property="name" column="username" />
+		<result property="password" column="userpd" />
+	</resultMap>
+    
+    <update id="update">
+        update admin set username = #{name}, userpd=#{password}
+        where userid = #{id}
+    </update>
+    
+    <select id="selectById" resultMap="UserResultMap">
+        select * from admin where userid = #{id}
+    </select>
+
+</mapper>
