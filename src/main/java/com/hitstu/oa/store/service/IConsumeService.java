@@ -1,6 +1,5 @@
 package com.hitstu.oa.store.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.hitstu.oa.store.model.ConsumeModel;
@@ -21,4 +20,8 @@ public interface IConsumeService {
 	public int getCountByAll() throws Exception;
 
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	public ConsumeModel getByIdWithGoods(String id, String date) throws Exception;
+
+	public List<ConsumeModel> getPageWithGoods(int rows, int page) throws Exception;
 }

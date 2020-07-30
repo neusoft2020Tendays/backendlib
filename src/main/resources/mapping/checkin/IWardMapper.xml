@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.checkin.mapper.IWardMapper">
+	<!-- 房间查询基础映射，不包含关联属性 -->
+	<resultMap id="WardResultMap" type="Ward">
+		<id property="floor" column="floor" />
+		<id property="room" column="room" />
+		<id property="bed" column="bed" />
+	</resultMap>
+
+	<!-- 房间查询映射，包含关联属性ElderlyModel -->
+	<resultMap id="WardWithElderlyResultMap" type="Ward" extends="WardResultMap">
+		<association property="elderly" resultMap="com.hitstu.oa.checkin.mapper.IElderlyMapper.ElderlyResultMap"></association>
+	</resultMap>
+	
+	<insert id="insert" parameterType="Ward">
+		insert into ward
+		(floor, room, bed, elderlyid)
+		values
+		(#{floor}, #{room}, #{bed}, #{elderly.elderlyid})
+	</insert>
+
+	<update id="update">
+		update ward set
+		elderlyid=#{elderly.elderlyid}
+		where floor=#{floor} and room=#{room} and bed=#{bed}
+	</update>
+
+	<delete id="delete" parameterType="Ward">
+		delete from ward where floor=#{floor} and room=#{room} and bed=#{bed}
+	</delete>
+
+	<select id="selectByAll" resultMap="WardWithElderlyResultMap">
+		select a.*,b.* from ward a inner join elderly b on a.elderlyid=b.elderlyid
+	</select>
+
+	<select id="selectFloorByAll" resultType="java.lang.String">
+		select distinct floor from ward
+	</select>
+	
+	<select id="selectRoomByFloor" resultType="java.lang.String">
+		select distinct room from ward where floor=#{floor}
+	</select>
+	
+	<select id="selectWardByFloorAndRoom" resultType="java.lang.String">
+		select distinct bed from ward where floor=#{floor} and room=#{room}
+	</select>
+	
+	<select id="selectWardByFloorAndRoomAndWard" resultMap="WardWithElderlyResultMap">
+		select a.*,b.* from ward a inner join elderly b on a.elderlyid=b.elderlyid
+		where a.floor=#{floor} and a.room=#{room} and a.ward=#{ward}
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="WardResultMap">
+		select * from ward
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from ward
+	</select>
+	
+</mapper>

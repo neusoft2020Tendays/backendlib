@@ -48,8 +48,10 @@ public interface IEmployeeService {
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 按综合条件检索员工列表，分页模式，只取关联的部门属性对象
 	public List<EmployeeModel> getListByConditionWithDepartmentWithPage(int rows, int page,  int lowAge, int highAge,
-			String sex, String nameKey, String leave, String fired) throws Exception;
+			String sex, String nameKey, String leave, String fired, String deptid) throws Exception;
 
 	// 按综合条件检索员工个数
-	public int getCountByCondition(int rows, int page,  int lowAge,  int highAge, String sex, String nameKey, String leave, String fired) throws Exception;
+	public int getCountByCondition(int lowAge,  int highAge, String sex, String nameKey, String leave, String fired, String deptid) throws Exception;
+	
+	public int getPageCountByCondition(int rows, int lowAge,  int highAge, String sex, String nameKey, String leave, String fired, String deptid) throws Exception;
 }

@@ -1,6 +1,5 @@
 package com.hitstu.oa.store.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +22,8 @@ public interface IConsumeMapper {
 	public List<ConsumeModel> selectByAllWithPage(@Param("start")int start, @Param("rows")int rows) throws Exception;
 
 	public int selectCountByAll() throws Exception;
+	
+	public List<ConsumeModel> selectPageWithGoods(@Param("start")int start, @Param("rows")int rows) throws Exception; 
+	
+	public ConsumeModel selectByIdWithGoods(@Param("id")String id, @Param("date")String date) throws Exception;
 }

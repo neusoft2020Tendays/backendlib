@@ -82,7 +82,6 @@ public class ConsumeController {
 	@GetMapping("/listAllPageWithGoods")
 	public Result<ConsumeModel> getListByAllWithPageWithGoods(@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
-		
 		Result<ConsumeModel> result = new Result<>();
 		result.setCount(consumeService.getCountByAll());
 		result.setPageCount(consumeService.getPageCountByAll(rows));
@@ -106,5 +105,30 @@ public class ConsumeController {
 		return result;
 	}
 	
+	@GetMapping("/listPageWithGoods")
+	public Result<ConsumeModel> getListPageWithGoods(@RequestParam(required = false, defaultValue = "10") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
+		
+		Result<ConsumeModel> result = new Result<>();
+		result.setCount(consumeService.getCountByAll());
+		result.setPageCount(consumeService.getPageCountByAll(rows));
+		result.setRows(rows);
+		result.setPage(page);
+		result.setList(consumeService.getPageWithGoods(rows, page));
+		result.setStatus("OK");
+		result.setMessage("取得分页货物使用信息(带Goods信息)成功");
+		return result;
+	}
 	
+	
+	@GetMapping("/getWithGoods")
+	public Result<ConsumeModel> getByIdWithGoods(@RequestParam(required = true) String id, 
+			@RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date) throws Exception {
+		Result<ConsumeModel> result = new Result<>();
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		result.setResult(consumeService.getByIdWithGoods(id, dateFormat.format(date)));
+		result.setStatus("OK");
+		result.setMessage("取得特定货品消耗单(带Goods信息)成功");
+		return result;
+	}
 }

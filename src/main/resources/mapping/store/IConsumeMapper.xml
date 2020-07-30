@@ -10,9 +10,16 @@
 		<result property="amount" column="consamount" />
 	</resultMap>
 
+	<resultMap id="ConsumeResultMapWithGoods" type="Consume"
+		extends="ConsumeResultMap">
+		<association property="goods"
+			resultMap="com.hitstu.oa.store.mapper.IGoodsMapper.GoodsResultMap"></association>
+	</resultMap>
+
 	<insert id="insert" parameterType="Consume">
 		insert into consume
-		(goodsid, date, consamount)
+		(goodsid,
+		date, consamount)
 		values
 		(#{id}, #{date}, #{amount})
 	</insert>
@@ -20,11 +27,13 @@
 	<update id="update">
 		update consume set
 		consamount=#{amount}
-		where goodsid=#{id} and date=#{date}
+		where
+		goodsid=#{id} and date=#{date}
 	</update>
 
 	<delete id="delete" parameterType="Consume">
-		delete from consume where goodsid=#{id} and date=#{date}
+		delete from consume where
+		goodsid=#{id} and date=#{date}
 	</delete>
 
 	<select id="selectByAll" resultMap="ConsumeResultMap">
@@ -33,16 +42,28 @@
 
 	<select id="selectById" resultMap="ConsumeResultMap">
 		select * from consume
-		where goodsid=#{id} and DATE_FORMAT(date, '%Y%m%d')=#{date}
+		where
+		goodsid=#{id} and DATE_FORMAT(date, '%Y%m%d')=#{date}
 	</select>
 
 	<select id="selectByAllWithPage" resultMap="ConsumeResultMap">
 		select * from consume
 		limit #{start}, #{rows}
 	</select>
-	
+
 	<select id="selectCountByAll" resultType="_int">
 		select count(*) from consume
 	</select>
-	
+
+	<select id="selectPageWithGoods"
+		resultMap="ConsumeResultMapWithGoods">
+		select a.*, b.* from consume a inner join goods b on a.goodsid = b.goodsid
+		limit #{start}, #{rows}
+	</select>
+
+	<select id="selectByIdWithGoods" resultMap="ConsumeResultMapWithGoods">
+		select a.*, b.* from consume a inner join goods b on a.goodsid = b.goodsid
+		where a.goodsid=#{id} and DATE_FORMAT(date, '%Y%m%d')=#{date}
+	</select>
+
 </mapper>

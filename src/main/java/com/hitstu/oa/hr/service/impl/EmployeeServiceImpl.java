@@ -93,7 +93,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public List<EmployeeModel> getListByConditionWithDepartmentWithPage(int rows, int page, int lowAge, int highAge,
-			String sex, String nameKey, String leave, String fired) throws Exception {
+			String sex, String nameKey, String leave, String fired, String deptid) throws Exception {
 		sex = getSex(sex);
 		nameKey = getNameKey(nameKey);
 		if (leave != null) {
@@ -102,11 +102,14 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		if (fired != null) {
 			fired = fired.trim();
 		}
-		return employeeMapper.selectListByConditionWithDepartmentWithPage(rows*(page-1), rows, lowAge, highAge, sex, nameKey, leave, fired);
+		if (deptid != null) {
+			deptid = deptid.trim();
+		}
+		return employeeMapper.selectListByConditionWithDepartmentWithPage(rows*(page-1), rows,  lowAge, highAge, sex, nameKey, leave, fired, deptid);
 	}
 
 	@Override
-	public int getCountByCondition(int rows, int page, int lowAge, int highAge, String sex, String nameKey, String leave, String fired)
+	public int getCountByCondition(int lowAge, int highAge, String sex, String nameKey, String leave, String fired, String deptid)
 			throws Exception {
 		sex = getSex(sex);
 		nameKey = getNameKey(nameKey);
@@ -116,7 +119,22 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		if (fired != null) {
 			fired = fired.trim();
 		}
-		return employeeMapper.selectCountByCondition(rows*(page - 1), rows, lowAge, highAge, sex, nameKey, leave, fired);
+		if (deptid != null) {
+			deptid = deptid.trim();
+		}
+		return employeeMapper.selectCountByCondition(lowAge, highAge, sex, nameKey, leave, fired, deptid);
+	}
+	
+	@Override
+	public int getPageCountByCondition(int rows, int lowAge, int highAge, String sex, String nameKey,
+			String leave, String fired, String deptid) throws Exception {
+		int count = getCountByCondition(lowAge, highAge, sex, nameKey, leave, fired, deptid);
+		int page = count / rows;
+		int ys = count - page*rows;
+		if(ys != 0) {
+			page += 1;
+		}
+		return page;
 	}
 
 	@Override
