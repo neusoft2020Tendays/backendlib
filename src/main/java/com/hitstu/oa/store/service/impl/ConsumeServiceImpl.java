@@ -1,6 +1,5 @@
 package com.hitstu.oa.store.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +66,16 @@ public class ConsumeServiceImpl implements IConsumeService {
 			pageCount = count / rows + 1;
 		}
 		return pageCount;
+	}
+
+	@Override
+	public ConsumeModel getByIdWithGoods(String id, String date) throws Exception {
+		return consumeMapper.selectByIdWithGoods(id, date);
+	}
+
+	@Override
+	public List<ConsumeModel> getPageWithGoods(int rows, int page) throws Exception {
+		return consumeMapper.selectPageWithGoods(rows*(page-1), rows);
 	}
 
 }

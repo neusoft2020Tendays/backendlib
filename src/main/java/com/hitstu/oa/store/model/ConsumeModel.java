@@ -12,7 +12,14 @@ public class ConsumeModel {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="UTC")
 	private Date date = null;
 	private double amount = 0;
-//	private GoodsModel 
+	private GoodsModel goods= null;
+	
+	public GoodsModel getGoods() {
+		return goods;
+	}
+	public void setGoods(GoodsModel goods) {
+		this.goods = goods;
+	}
 	public String getId() {
 		return id;
 	}

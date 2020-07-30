@@ -74,7 +74,7 @@ public class EmployeeController {
 		
 		Result<EmployeeModel> result = new Result<>();
 		result.setCount(employeeService.getCountByAll());
-		result.setPage(employeeService.getPageCountByAll(rows));
+		result.setPageCount(employeeService.getPageCountByAll(rows));
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(employeeService.getByAllWithPage(rows, page));
@@ -89,7 +89,7 @@ public class EmployeeController {
 		
 		Result<EmployeeModel> result = new Result<>();
 		result.setCount(employeeService.getCountByAll());
-		result.setPage(employeeService.getPageCountByAll(rows));
+		result.setPageCount(employeeService.getPageCountByAll(rows));
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(employeeService.getByAllWithDepartmentWithPage(rows, page));
@@ -122,13 +122,16 @@ public class EmployeeController {
 			@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "0")int lowAge, 
 			@RequestParam(required = false, defaultValue = "0")int highAge, @RequestParam(required = false, defaultValue = "")String sex,
 			@RequestParam(required = false, defaultValue = "")String nameKey,@RequestParam(required = false, defaultValue = "")String leave,
-			@RequestParam(required = false, defaultValue = "")String fired) throws Exception {
+			@RequestParam(required = false, defaultValue = "")String fired, @RequestParam(required = false, defaultValue = "")String deptid) throws Exception {
 		Result<EmployeeModel> result = new Result<>();
+		if (deptid.equals("所有部门")) {
+			deptid="";
+		}
 		result.setPage(page);
 		result.setRows(rows);
-		result.setCount(employeeService.getCountByAll());
-		result.setPageCount(employeeService.getPageCountByAll(rows));
-		result.setList(employeeService.getListByConditionWithDepartmentWithPage(rows, page, lowAge, highAge, sex, nameKey, leave, fired));
+		result.setCount(employeeService.getCountByCondition(lowAge, highAge, sex, nameKey, leave, fired, deptid));
+		result.setPageCount(employeeService.getPageCountByCondition(rows, lowAge, highAge, sex, nameKey, leave, fired, deptid));
+		result.setList(employeeService.getListByConditionWithDepartmentWithPage(rows, page, lowAge, highAge, sex, nameKey, leave, fired, deptid));
 		result.setStatus("OK");
 		result.setMessage("取得特定员工信息(带部门)成功");
 		return result;

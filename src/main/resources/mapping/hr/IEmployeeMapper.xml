@@ -69,7 +69,7 @@
     
     <select id="selectListByConditionWithDepartmentWithPage" resultMap="EmployeeResultMapWithDepartment">
         select a.*,b.* from employee a inner join department b on a.deptid = b.deptid 
-        <where/>
+        <where> 1 = 1
 
         <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
             and a.empage &gt;= #{lowAge}
@@ -99,12 +99,17 @@
         <if test="leave != null and leave != ''">
             and a.vacation = #{leave}
         </if>
+        
+        <if test="deptid != null and deptid != ''">
+            and b.deptid= #{deptid}
+        </if>
+        </where>
         limit ${start}, #{rows}
     </select>
     
     <select id="selectCountByCondition" resultType="_int">
-        select count(*) from employee a inner join department b on a.deptid = b.depetid 
-        <where/>
+        select count(*) from employee a inner join department b on a.deptid = b.deptid 
+        <where> 1= 1
 
         <if test="lowAge &gt; 0 and highAge &gt; 0 and highAge &gt;= lowAge">
             and a.empage &gt;= #{lowAge}
@@ -135,5 +140,9 @@
             and a.vacation = #{leave}
         </if>
         
+        <if test="deptid != null and deptid != ''">
+            and b.deptid= #{deptid}
+        </if>
+        </where>
     </select>
 </mapper>

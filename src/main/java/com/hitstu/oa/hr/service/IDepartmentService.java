@@ -20,4 +20,6 @@ public interface IDepartmentService {
 	public int getCountByAll() throws Exception;
 
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	public List<String> getDeptidByAll() throws Exception;
 }

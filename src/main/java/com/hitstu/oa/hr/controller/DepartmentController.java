@@ -84,5 +84,14 @@ public class DepartmentController {
 		}
 		return result;
 	}
+	
+	@GetMapping(value = "/get/all/deptid")
+	public Result<String> getDeptidByAll() throws Exception {
+		Result<String> result = new Result<>();
+		result.setStatus("OK");
+		result.setMessage("获取全部部门名称成功！");
+		result.setList(departmentService.getDeptidByAll());
+		return result;
+	}
 
 }
