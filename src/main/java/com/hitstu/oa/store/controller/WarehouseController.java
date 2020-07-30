@@ -73,11 +73,11 @@ public class WarehouseController {
 		result.setPage(page);
 		result.setList(warehouseService.getByAllWithPage(rows, page));
 		result.setStatus("OK");
-		result.setMessage("取得分页货物使用信息成功");
+		result.setMessage("取得分页仓库信息成功");
 		return result;
 	}
 	
-	@GetMapping("/listAllPageWithGoods")
+	@GetMapping("/listAllPageWithWarehouse")
 	public Result<WarehouseModel> getListByAllWithPageWithGoods(@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 		
@@ -88,7 +88,7 @@ public class WarehouseController {
 		result.setPage(page);
 		result.setList(warehouseService.getByAllWithPage(rows, page));
 		result.setStatus("OK");
-		result.setMessage("取得分页货物使用信息成功");
+		result.setMessage("取得分页仓库信息成功");
 		return result;
 	}
 	
@@ -99,7 +99,7 @@ public class WarehouseController {
 		
 		result.setResult(warehouseService.getById(id));
 		result.setStatus("OK");
-		result.setMessage("取得特定货品单成功");
+		result.setMessage("取得特定仓库信息成功");
 //		org.apache.ibatis.type.JdbcType.DATETIMEOFFSET
 		return result;
 	}
