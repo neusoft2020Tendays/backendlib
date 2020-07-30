@@ -3,6 +3,7 @@ package com.hitstu.oa.checkin.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.hitstu.oa.checkin.model.ElderlyModel;
 
@@ -22,5 +23,9 @@ public interface IElderlyMapper {
 	public List<ElderlyModel> selectByAllWithPage(int start, int rows) throws Exception;
 
 	public int selectCountByAll() throws Exception;
+
+	public List<ElderlyModel> selectListByConditionWithPage(@Param("start") int start, @Param("rows") int rows,
+			@Param("minAge") int minAge, @Param("maxAge") int maxAge, @Param("floor") String floor,
+			@Param("room") String room, @Param("nameKey") String nameKey) throws Exception;
 
 }

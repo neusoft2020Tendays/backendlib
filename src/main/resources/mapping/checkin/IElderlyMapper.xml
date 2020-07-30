@@ -52,5 +52,24 @@
 		elderly
 	</select>
 
+	<select id="selectListByConditionWithPage"
+		resultMap="ElderlyResultMap">
+		select * from elderly where 1=1
+		<if
+			test="minAge &gt; 0 and minAge &lt;= 150 and maxAge &gt; 0 and maxAge &lt;= 150">
+			and elderage &gt;= #{minAge}
+			and elderage &lt;= #{maxAge}
+		</if>
+		<if test="floor != '所有楼层'">
+			and floor = #{floor}
+		</if>
+		<if test="room != '所有房间'">
+			and room = #{room}
+		</if>
+		<if test="nameKey != ''">
+			and eldername like #{nameKey}
+		</if>
+	</select>
+
 
 </mapper>
