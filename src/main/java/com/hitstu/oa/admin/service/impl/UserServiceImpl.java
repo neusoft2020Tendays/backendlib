@@ -39,4 +39,9 @@ public class UserServiceImpl implements IUserService {
                 }
 	}
 
+	@Override
+	public void addUser(UserModel userModel) throws Exception {
+		userMapper.insert(userModel);
+	}
+
 }

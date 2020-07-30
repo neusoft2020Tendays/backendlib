@@ -6,6 +6,8 @@ import com.hitstu.oa.admin.model.UserModel;
 
 @Mapper
 public interface IUserMapper {
+	public void insert(UserModel um) throws Exception;
+	
 	public void update(UserModel um) throws Exception;
 
         public UserModel selectById(String id) throws Exception;

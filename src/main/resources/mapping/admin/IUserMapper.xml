@@ -18,5 +18,9 @@
     <select id="selectById" resultMap="UserResultMap">
         select * from admin where userid = #{id}
     </select>
+    
+    <insert id="insert">
+        insert into admin values(#{id},#{name},#{password})
+    </insert>
 
 </mapper>
