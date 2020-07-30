@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.hitstu.oa.store.model.WarehouseModel;
-
+//
 @Mapper
 public interface IWarehouseMapper {
 	public void insert(WarehouseModel warehouseModel) throws Exception;

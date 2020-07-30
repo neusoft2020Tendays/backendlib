@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 public class WarehouseModel  implements Serializable{
 
 	/**
-	 * 
+	 * 1
 	 */
 	private static final long serialVersionUID = 1L;
 	

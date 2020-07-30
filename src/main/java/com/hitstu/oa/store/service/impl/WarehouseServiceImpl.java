@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hitstu.oa.store.mapper.IWarehouseMapper;
 import com.hitstu.oa.store.model.WarehouseModel;
 import com.hitstu.oa.store.service.IWarehouseService;
-
+//
 @Service("warehouseService")
 @Transactional
 public class WarehouseServiceImpl implements IWarehouseService{

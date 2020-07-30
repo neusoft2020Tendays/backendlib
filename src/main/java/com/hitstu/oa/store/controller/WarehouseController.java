@@ -32,6 +32,7 @@ public class WarehouseController {
 		result.setMessage("增加仓库信息成功");
 		return result;
 	}
+	//
 
 	@PostMapping("/modify")
 	public Result<String> modify(@RequestBody WarehouseModel warehouseModel) throws Exception {

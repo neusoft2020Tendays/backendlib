@@ -3,7 +3,7 @@ package com.hitstu.oa.store.service;
 import java.util.List;
 
 import com.hitstu.oa.store.model.WarehouseModel;
-
+//
 public interface IWarehouseService {
 	public void add(WarehouseModel warehouseModel) throws Exception;
 
