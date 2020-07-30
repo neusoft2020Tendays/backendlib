@@ -124,6 +124,9 @@ public class EmployeeController {
 			@RequestParam(required = false, defaultValue = "")String nameKey,@RequestParam(required = false, defaultValue = "")String leave,
 			@RequestParam(required = false, defaultValue = "")String fired, @RequestParam(required = false, defaultValue = "")String deptid) throws Exception {
 		Result<EmployeeModel> result = new Result<>();
+		if (deptid.equals("所有部门")) {
+			deptid="";
+		}
 		result.setPage(page);
 		result.setRows(rows);
 		result.setCount(employeeService.getCountByCondition(lowAge, highAge, sex, nameKey, leave, fired, deptid));
