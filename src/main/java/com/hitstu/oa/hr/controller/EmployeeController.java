@@ -74,7 +74,7 @@ public class EmployeeController {
 		
 		Result<EmployeeModel> result = new Result<>();
 		result.setCount(employeeService.getCountByAll());
-		result.setPage(employeeService.getPageCountByAll(rows));
+		result.setPageCount(employeeService.getPageCountByAll(rows));
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(employeeService.getByAllWithPage(rows, page));
@@ -89,7 +89,7 @@ public class EmployeeController {
 		
 		Result<EmployeeModel> result = new Result<>();
 		result.setCount(employeeService.getCountByAll());
-		result.setPage(employeeService.getPageCountByAll(rows));
+		result.setPageCount(employeeService.getPageCountByAll(rows));
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(employeeService.getByAllWithDepartmentWithPage(rows, page));
