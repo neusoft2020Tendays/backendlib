@@ -62,7 +62,7 @@
 	
 	<select id="selectWardByFloorAndRoomAndWard" resultMap="WardWithElderlyResultMap">
 		select a.*,b.* from ward a left join elderly b on a.elderlyid=b.elderlyid
-		where a.floor=#{floor} and a.room=#{room} and a.ward=#{ward}
+		where a.floor=#{floor} and a.room=#{room} and a.bed=#{bed}
 	</select>
 
 	<select id="selectByAllWithPage" resultMap="WardResultMap">
