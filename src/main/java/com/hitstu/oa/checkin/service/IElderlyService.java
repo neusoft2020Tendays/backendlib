@@ -12,6 +12,7 @@ public interface IElderlyService {
 	public void delete(ElderlyModel elderlyModel) throws Exception;
 
 	public void modify(ElderlyModel elderlyModel) throws Exception;
+	public void modifyPhoto(ElderlyModel elderlyModel) throws Exception;
 
 	public List<ElderlyModel> getByAll() throws Exception;
 

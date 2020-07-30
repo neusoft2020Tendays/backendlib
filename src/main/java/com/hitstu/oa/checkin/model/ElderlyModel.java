@@ -13,6 +13,33 @@ public class ElderlyModel implements Serializable {
 	private String floor = null;
 	private String room = null;
 	private String bed = null;
+	private byte[] photo = null;
+	private String photoFileName = null;
+	private String photoContentType = null;
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+
+	public String getPhotoContentType() {
+		return photoContentType;
+	}
+
+	public void setPhotoContentType(String photoContentType) {
+		this.photoContentType = photoContentType;
+	}
 
 	public String getElderlyid() {
 		return elderlyid;

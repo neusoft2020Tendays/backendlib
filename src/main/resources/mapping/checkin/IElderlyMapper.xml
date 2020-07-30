@@ -12,6 +12,9 @@
 		<result property="floor" column="floor" />
 		<result property="room" column="room" />
 		<result property="bed" column="bed" />
+		<result property="photo" column="photo" />
+		<result property="photoFileName" column="photofilename" />
+		<result property="photoContentType" column="photocontenttype" />
 
 	</resultMap>
 
@@ -22,9 +25,33 @@
 		(#{elderlyid},#{eldername},#{eldersex},#{elderage},#{floor},#{room},#{bed})
 	</insert>
 
+	<insert id="insertWithPhoto" parameterType="Elderly">
+		insert into elderly
+		(elderlyid, eldername, eldersex, elderage, floor, room, bed, photo,
+		photofilename, photocontenttype)
+		values
+		(#{elderlyid},#{eldername},#{eldersex},#{elderage},#{floor},#{room},#{bed},#{photo},#{photoFileName},#{photoContentType})
+	</insert>
+
 	<update id="update">
 		update elderly set
 		eldername=#{eldername},eldersex=#{eldersex},elderage=#{elderage},floor=#{floor},room=#{room},bed=#{bed}
+		where elderlyid=#{elderlyid}
+	</update>
+
+	<update id="updatePhoto">
+		update elderly set
+		photo = #{photo}, photofilename =
+		#{photoFileName}, photocontenttype = #{photoContentType}
+		where
+		elderlyid=#{elderlyid}
+	</update>
+
+	<update id="updateWithPhoto">
+		update elderly set
+		eldername=#{eldername},eldersex=#{eldersex},elderage=#{elderage},floor=#{floor},room=#{room},bed=#{bed},photo
+		= #{photo}, photofilename = #{photoFileName}, photocontenttype =
+		#{photoContentType}
 		where elderlyid=#{elderlyid}
 	</update>
 

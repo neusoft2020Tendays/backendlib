@@ -23,7 +23,11 @@ public class ElderlyServiceImpl implements IElderlyService {
 
 	@Override
 	public void add(ElderlyModel elderlyModel) throws Exception {
-		elderlyMapper.insert(elderlyModel);
+		if (elderlyModel.getPhotoFileName() != null) {
+			elderlyMapper.insertWithPhoto(elderlyModel);
+		} else {
+			elderlyMapper.insert(elderlyModel);
+		}
 	}
 
 	@Override
@@ -33,6 +37,15 @@ public class ElderlyServiceImpl implements IElderlyService {
 
 	@Override
 	public void modify(ElderlyModel elderlyModel) throws Exception {
+		if (elderlyModel.getPhotoFileName() != null) {
+			elderlyMapper.updateWithPhoto(elderlyModel);
+		} else {
+			elderlyMapper.update(elderlyModel);
+		}
+	}
+
+	@Override
+	public void modifyPhoto(ElderlyModel elderlyModel) throws Exception {
 		elderlyMapper.update(elderlyModel);
 	}
 

@@ -12,9 +12,14 @@ public interface IElderlyMapper {
 
 	public void insert(ElderlyModel elderlyModel) throws Exception;
 
+	public void insertWithPhoto(ElderlyModel elderlyModel) throws Exception;
+
 	public void delete(ElderlyModel elderlyModel) throws Exception;
 
 	public void update(ElderlyModel elderlyModel) throws Exception;
+	public void updatePhoto(ElderlyModel elderlyModel) throws Exception;
+
+	public void updateWithPhoto(ElderlyModel elderlyModel) throws Exception;
 
 	public List<ElderlyModel> selectByAll() throws Exception;
 
