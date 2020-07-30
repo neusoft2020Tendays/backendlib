@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hitstu.oa.restresult.Result;
 import com.hitstu.oa.store.model.PurchaseModel;
+import com.hitstu.oa.store.service.IGoodsService;
 import com.hitstu.oa.store.service.IPurchaseService;
 
 @RestController
@@ -24,6 +25,9 @@ import com.hitstu.oa.store.service.IPurchaseService;
 public class PurchaseController {
 	@Autowired
 	private IPurchaseService purchaseService = null;
+
+	@Autowired
+	private IGoodsService goodsService = null;
 
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody PurchaseModel purchaseModel) throws Exception {
