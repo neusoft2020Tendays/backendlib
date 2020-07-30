@@ -33,23 +33,34 @@
 	</delete>
 
 	<select id="selectByAll" resultMap="WardWithElderlyResultMap">
-		select a.*,b.* from ward a inner join elderly b on a.elderlyid=b.elderlyid
+		select a.*,b.* from ward a left join elderly b on a.elderlyid=b.elderlyid
 	</select>
 
 	<select id="selectFloorByAll" resultType="java.lang.String">
 		select distinct floor from ward
 	</select>
-	
+	<!-- 根据楼层查房间，返回String -->
 	<select id="selectRoomByFloor" resultType="java.lang.String">
 		select distinct room from ward where floor=#{floor}
 	</select>
-	
+	<!-- 根据楼层查床位，返回WardModel -->
+	<select id="selectByFloor" resultMap="WardWithElderlyResultMap">
+		select a.*,b.* from ward a left join elderly b on a.elderlyid=b.elderlyid and a.floor=#{floor}
+	</select>
+	<!-- 根据楼层和房间号查床位，返回String -->
 	<select id="selectWardByFloorAndRoom" resultType="java.lang.String">
-		select distinct bed from ward where floor=#{floor} and room=#{room}
+		select distinct room from ward where floor=#{floor}
+	</select>
+	<!-- 根据楼层和房间号查床位，返回WardModel -->
+	<select id="selectByFloorAndRoom" resultMap="WardWithElderlyResultMap">
+		select a.*,b.* from ward a left join elderly b on a.elderlyid=b.elderlyid and a.floor=#{floor} and a.room=#{room}
 	</select>
 	
+	
+	
+	
 	<select id="selectWardByFloorAndRoomAndWard" resultMap="WardWithElderlyResultMap">
-		select a.*,b.* from ward a inner join elderly b on a.elderlyid=b.elderlyid
+		select a.*,b.* from ward a left join elderly b on a.elderlyid=b.elderlyid
 		where a.floor=#{floor} and a.room=#{room} and a.ward=#{ward}
 	</select>
 

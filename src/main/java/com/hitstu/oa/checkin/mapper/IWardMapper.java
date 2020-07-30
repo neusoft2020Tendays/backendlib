@@ -29,5 +29,10 @@ public interface IWardMapper {
 	public List<WardModel> selectByAllWithPage(int start, int rows) throws Exception;
 
 	public int selectCountByAll() throws Exception;
+	
+	//通过楼层查所有的房间
+	public List<WardModel> selectByFloor(String floor) throws Exception;
+	//通过楼层和房间号查所有的床位
+	public List<WardModel> selectByFloorAndRoom(String floor, String room) throws Exception;
 
 }
