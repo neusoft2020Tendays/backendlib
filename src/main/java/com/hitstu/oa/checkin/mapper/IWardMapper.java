@@ -24,7 +24,7 @@ public interface IWardMapper {
 	//通过楼层和房间号查所有的床位
 	public List<String> selectWardByFloorAndRoom(String floor, String room) throws Exception;
 
-	public WardModel selectWardByFloorAndRoomAndWard(String floor, String room, String ward) throws Exception;
+	public WardModel selectWardByFloorAndRoomAndWard(String floor, String room, String bed) throws Exception;
 
 	public List<WardModel> selectByAllWithPage(int start, int rows) throws Exception;
 

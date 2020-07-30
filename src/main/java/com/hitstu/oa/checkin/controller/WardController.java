@@ -3,6 +3,8 @@ package com.hitstu.oa.checkin.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,11 @@ public class WardController {
 	private IWardService wardService = null;
 
 
-	@RequestMapping(value = "/add")
-	public Result<String> add(WardModel wardModel) throws Exception {
+	@PostMapping(value = "/add")
+	public Result<String> add(@RequestBody WardModel wardModel) throws Exception {
+		System.out.println(wardModel.getFloor());
+		System.out.println(wardModel.getRoom());
+		System.out.println(wardModel.getBed());
 		wardService.add(wardModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
@@ -30,7 +35,7 @@ public class WardController {
 	}
 
 	@RequestMapping(value = "/modify")
-	public Result<String> modify(WardModel wardModel) throws Exception {
+	public Result<String> modify(@RequestBody WardModel wardModel) throws Exception {
 		wardService.modify(wardModel);
 		Result<String> result = new Result<>();
 		result.setStatus("OK");
@@ -39,11 +44,17 @@ public class WardController {
 	}
 
 	@RequestMapping(value = "/delete")
-	public Result<String> delete(WardModel wardModel) throws Exception {
-		wardService.delete(wardModel);
+	public Result<String> delete(@RequestBody WardModel wardModel) throws Exception {
+		//增加判断，若床位上有老人，则不应该删除
 		Result<String> result = new Result<>();
-		result.setStatus("OK");
-		result.setMessage("删除床位成功！");
+		result.setStatus("Error");
+		result.setMessage("该床位上有老人！");
+		WardModel search = wardService.getById(wardModel.getFloor(), wardModel.getRoom(), wardModel.getBed());
+		if(search.getElderly()==null) {
+			wardService.delete(wardModel);
+			result.setStatus("OK");
+			result.setMessage("删除床位成功！");
+		}
 		return result;
 	}
 
