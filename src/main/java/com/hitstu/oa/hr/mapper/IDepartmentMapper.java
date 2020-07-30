@@ -22,5 +22,7 @@ public interface IDepartmentMapper {
 	public List<DepartmentModel> selectByAllWithPage(int start, int rows) throws Exception;
 
 	public int selectCountByAll() throws Exception;
+	
+	public List<String> selectDeptidByAll() throws Exception;
 
 }

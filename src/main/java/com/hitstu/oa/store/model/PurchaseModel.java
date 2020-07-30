@@ -5,9 +5,12 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Alias("Purchase")
 public class PurchaseModel implements Serializable {
 	private String goodsid = null;
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="UTC")
 	private Date date = null;
 	private double puramount = 0;
 
@@ -27,12 +30,13 @@ public class PurchaseModel implements Serializable {
 		this.date = date;
 	}
 
-	public double getAmount() {
+	public double getPuramount() {
 		return puramount;
 	}
 
-	public void setAmount(double amount) {
-		this.puramount = amount;
+	public void setPuramount(double puramount) {
+		this.puramount = puramount;
 	}
+
 
 }

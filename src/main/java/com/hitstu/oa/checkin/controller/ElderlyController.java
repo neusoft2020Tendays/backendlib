@@ -61,7 +61,7 @@ public class ElderlyController {
 	@PostMapping(value = "/modify")
 	public Result<String> modify(@RequestBody ElderlyModel elderlyModel) throws Exception {
 		Result<String> result = new Result<>();
-		result.setStatus("ERROR");		
+		result.setStatus("ERROR");
 		if (!elderlyModel.getEldersex().equals("男") && !elderlyModel.getEldersex().equals("女")) {
 			result.setMessage("性别必须为“男”或“女”");
 		} else if (!new HashSet<>(wardService.getFloorByAll()).contains(elderlyModel.getFloor())) {
@@ -76,7 +76,7 @@ public class ElderlyController {
 						.contains(elderlyModel.getBed())) {
 			result.setMessage("楼层 " + elderlyModel.getFloor() + " 的房间  " + elderlyModel.getRoom() + " 中的床位号 "
 					+ elderlyModel.getBed() + " 不存在！");
-		} else if (elderlyModel.getElderage() <= 0 || elderlyModel.getElderage() >= 150) {
+		} else if (elderlyModel.getElderage() <= 0 || elderlyModel.getElderage() > 150) {
 			result.setMessage("年龄 " + elderlyModel.getElderage() + " 不合法！");
 		} else {
 			elderlyService.modify(elderlyModel);
@@ -105,6 +105,25 @@ public class ElderlyController {
 		result.setRows(rows);
 		result.setPage(page);
 		result.setList(elderlyService.getByAllWithPage(rows, page));
+		result.setStatus("OK");
+		result.setMessage("老人列表分页方式成功！");
+		return result;
+	}
+
+	@GetMapping(value = "/list/condition/page")
+	public Result<ElderlyModel> getListByConditionWithPage(@RequestParam(required = false, defaultValue = "5") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "0") int minAge,
+			@RequestParam(required = false, defaultValue = "0") int maxAge,
+			@RequestParam(required = false, defaultValue = "所有楼层") String floor,
+			@RequestParam(required = false, defaultValue = "所有房间") String room,
+			@RequestParam(required = false, defaultValue = "") String nameKey) throws Exception {
+		Result<ElderlyModel> result = new Result<>();
+		result.setCount(elderlyService.getCountByAll());
+		result.setPageCount(elderlyService.getPageCountByAll(rows));
+		result.setRows(rows);
+		result.setPage(page);
+		result.setList(elderlyService.getListByConditionWithPage(rows, page, minAge, maxAge, floor, room, nameKey));
 		result.setStatus("OK");
 		result.setMessage("老人列表分页方式成功！");
 		return result;

@@ -68,4 +68,15 @@ public class ElderlyServiceImpl implements IElderlyService {
 		return pageCount;
 	}
 
+	@Override
+	public List<ElderlyModel> getListByConditionWithPage(int rows, int page, int minAge, int maxAge, String floor,
+			String room, String nameKey) throws Exception {
+
+		if (nameKey != null && nameKey.trim().length() > 0) {
+			nameKey = "%" + nameKey + "%";
+		}
+		return elderlyMapper.selectListByConditionWithPage(rows * (page - 1), rows, minAge, maxAge, floor, room,
+				nameKey);
+	}
+
 }
