@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.store.mapper.IWarehouseMapper">
+
+	<resultMap id="WarehouseResultMap" type="com.hitstu.oa.store.model.WarehouseModel">
+		<id property="warehouseid" column="warehouseid" />
+		<result property="empid" column="empid" />
+		<result property="address" column="address" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.hitstu.oa.store.model.WarehouseModel">
+		insert into warehouse
+		(warehouseid, empid, address)
+		values
+		(#{warehouseid}, #{empid}, #{address})
+	</insert>
+
+	<update id="update">
+		update warehouse set
+		empid =#{empid} , address = #{address}
+		where warehouseid=#{warehouseid}
+	</update>
+
+	<delete id="delete">
+		delete from warehouse where warehouseid=#{warehouseid} 
+	</delete>
+
+	<select id="selectByAll" resultMap="WarehouseResultMap">
+		select * from warehouse
+	</select>
+
+	<select id="selectById" resultMap="WarehouseResultMap">
+		select * from warehouse
+		where warehouseid=#{warehouseid} 
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="WarehouseResultMap">
+		select * from warehouse
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from warehouse
+	</select>
+	
+</mapper>
