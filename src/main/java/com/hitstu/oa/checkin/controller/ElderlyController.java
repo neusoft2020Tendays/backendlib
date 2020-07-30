@@ -53,7 +53,6 @@ public class ElderlyController {
 				elderlyModel.setPhoto(elderlyPhoto.getBytes());
 				// 保存上传文件到目标目录
 				elderlyPhoto.transferTo(dist);
-
 			}
 			elderlyService.add(elderlyModel);
 			result.setStatus("OK");
@@ -63,7 +62,8 @@ public class ElderlyController {
 	}
 
 	@PostMapping(value = "/modify")
-	public Result<String> modify(@RequestBody ElderlyModel elderlyModel) throws Exception {
+	public Result<String> modify(ElderlyModel elderlyModel, @RequestParam(required = false) MultipartFile elderlyPhoto)
+			throws Exception {
 		Result<String> result = new Result<>();
 		result.setStatus("ERROR");
 		if (!elderlyModel.getEldersex().equals("男") && !elderlyModel.getEldersex().equals("女")) {
@@ -85,9 +85,17 @@ public class ElderlyController {
 		else if (elderlyModel.getElderage() <= 0 || elderlyModel.getElderage() > 150) {
 			result.setMessage("年龄 " + elderlyModel.getElderage() + " 不合法！");
 		} else {
+			System.out.println(elderlyPhoto == null);
+			if (elderlyPhoto != null && (!elderlyPhoto.isEmpty())) {
+				File dist = new File("D:\\DriveY\\neosoft2020\\webroot\\photo\\" + elderlyPhoto.getOriginalFilename());
+				elderlyModel.setPhoto(elderlyPhoto.getBytes());
+				elderlyModel.setPhotoFileName(elderlyPhoto.getOriginalFilename());
+				elderlyModel.setPhotoContentType(elderlyPhoto.getContentType());
+				elderlyPhoto.transferTo(dist);
+			}
 			elderlyService.modify(elderlyModel);
 			result.setStatus("OK");
-			result.setMessage("增加老人成功！");
+			result.setMessage("修改老人成功！");
 		}
 		return result;
 	}
@@ -103,7 +111,7 @@ public class ElderlyController {
 		elderlyService.modifyPhoto(elderlyModel);
 		Result<String> result = new Result<String>();
 		result.setStatus("OK");
-		result.setMessage("修改员工照片成功!");
+		result.setMessage("修改员工成功!");
 		return result;
 	}
 
