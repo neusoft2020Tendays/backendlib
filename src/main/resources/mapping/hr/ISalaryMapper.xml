@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitstu.oa.hr.mapper.ISalaryMapper">
+
+	<resultMap id="SalaryResultMap" type="com.hitstu.oa.hr.model.SalaryModel">
+		<id property="salaryId" column="salaryid" />
+		<result property="empid" column="empid" />
+		<result property="salAccount" column="salamount" />
+		<result property="time" column="time" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.hitstu.oa.hr.model.SalaryModel">
+		insert into salary
+		(salaryid, empid, salamount, time)
+		values
+		(#{salaryId}, #{empid}, #{salAccount}, #{time})
+	</insert>
+
+	<update id="update">
+		update salary set
+		empid =#{empid} , salamount = #{salAccount}, time = #{time}
+		where salaryid=#{salaryId}
+	</update>
+
+	<delete id="delete">
+		delete from salary where salaryid=#{salaryId} 
+	</delete>
+
+	<select id="selectByAll" resultMap="SalaryResultMap">
+		select * from salary
+	</select>
+
+	<select id="selectById" resultMap="SalaryResultMap">
+		select * from salary
+		where salaryid=#{salaryId} 
+	</select>
+
+	<select id="selectByAllWithPage" resultMap="SalaryResultMap">
+		select * from salary
+		limit #{start}, #{rows}
+	</select>
+	
+	<select id="selectCountByAll" resultType="_int">
+		select count(*) from salary
+	</select>
+	
+</mapper>
