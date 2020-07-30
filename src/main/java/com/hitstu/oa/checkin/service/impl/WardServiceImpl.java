@@ -70,13 +70,23 @@ public class WardServiceImpl implements IWardService {
 	}
 
 	@Override
-	public List<String> getRoomByFloor(String floor) throws Exception {
-		return wardMapper.selectRoomByFloor(floor);
+	public List<WardModel> getByFloor(String floor) throws Exception {
+		return wardMapper.selectByFloor(floor);
+	}
+
+	@Override
+	public List<WardModel> getByFloorAndRoom(String floor, String room) throws Exception {
+		return wardMapper.selectByFloorAndRoom(floor, room);
 	}
 
 	@Override
 	public List<String> getWardByFloorAndRoom(String floor, String room) throws Exception {
-		return wardMapper.selectWardByFloorAndRoom(floor,room);
+		return wardMapper.selectWardByFloorAndRoom(floor, room);
+	}
+
+	@Override
+	public List<String> getRoomByFloor(String floor) throws Exception {
+		return wardMapper.selectRoomByFloor(floor);
 	}
 
 }

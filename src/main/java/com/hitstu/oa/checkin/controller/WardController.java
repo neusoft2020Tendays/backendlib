@@ -62,7 +62,16 @@ public class WardController {
 		return result;
 	}
 
-	@GetMapping(value = "/wards")
+	@GetMapping(value = "/list/all")
+	public Result<WardModel> getListByFloor(@RequestParam(required = false, defaultValue = "L01") String floor) throws Exception {
+		Result<WardModel> result = new Result<>();
+		result.setList(wardService.getByFloor(floor));
+		result.setStatus("OK");
+		result.setMessage("获取床位列表成功！");
+		return result;
+	}
+	
+	@GetMapping(value = "/bed")
 	public Result<String> getById(@RequestParam(required = true) String floor
 			,@RequestParam(required = true) String room) throws Exception {
 		Result<String> result = new Result<>();
