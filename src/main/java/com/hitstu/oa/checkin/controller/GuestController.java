@@ -1,5 +1,8 @@
 package com.hitstu.oa.checkin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hitstu.oa.checkin.model.CostModel;
 import com.hitstu.oa.checkin.model.GuestModel;
 import com.hitstu.oa.checkin.service.IGuestService;
 import com.hitstu.oa.restresult.Result;
@@ -76,4 +80,26 @@ public class GuestController {
 		}
 		return result;
 	}
+	
+	
+	@GetMapping(value = "/list/condition/page")
+	public Result<GuestModel> getListByConditionWithPage(@RequestParam(required = false, defaultValue = "5") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "-1") int minNum,
+			@RequestParam(required = false, defaultValue = "-1") int maxNum,
+			@RequestParam(required = false, defaultValue = "") String elderlyid,
+			@RequestParam(required = false, defaultValue = "") String nameKey) throws Exception {
+		Result<GuestModel> result = new Result<>();
+		result.setRows(rows);
+		result.setPage(page);
+		result.setList(guestService.getListByConditionWithPage(rows, page, minNum, maxNum, 
+				elderlyid,nameKey));
+		result.setStatus("OK");
+		result.setMessage("收费记录列表分页方式成功！");
+		return result;
+	}
+	
+	
+	
+	
 }

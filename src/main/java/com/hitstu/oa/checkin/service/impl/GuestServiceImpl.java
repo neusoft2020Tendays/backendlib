@@ -1,5 +1,6 @@
 package com.hitstu.oa.checkin.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hitstu.oa.checkin.mapper.IGuestMapper;
+import com.hitstu.oa.checkin.model.CostModel;
 import com.hitstu.oa.checkin.model.GuestModel;
 import com.hitstu.oa.checkin.service.IGuestService;
 
@@ -63,4 +65,17 @@ public class GuestServiceImpl implements IGuestService {
 		}
 		return pageCount;
 	}
+	
+	@Override
+	public List<GuestModel> getListByConditionWithPage(int rows, int page, int minNum, int maxNum,
+			String elderlyid, String nameKey) throws Exception {
+			
+		if (nameKey != null && nameKey.trim().length() > 0) {
+			nameKey = "%" + nameKey + "%";
+		}
+		return guestMapper.selectListByConditionWithPage(rows * (page - 1), rows, minNum, maxNum,
+				elderlyid,nameKey);
+	}
+	
+	
 }

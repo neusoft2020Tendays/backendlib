@@ -93,8 +93,7 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/get")
-	public Result<GoodsModel> getById(@RequestParam(required = true) String id, 
-			@RequestParam(required = true) Date date) throws Exception {
+	public Result<GoodsModel> getById(@RequestParam(required = true) String id) throws Exception {
 		Result<GoodsModel> result = new Result<>();
 		
 		result.setResult(goodsService.getById(id));

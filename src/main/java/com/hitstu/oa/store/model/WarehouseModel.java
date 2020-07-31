@@ -15,7 +15,7 @@ public class WarehouseModel  implements Serializable{
 	
 	private String warehouseid = null;
 	private String empid = null;
-	private Double address = null;
+	private String address = null;
 	public String getWarehouseid() {
 		return warehouseid;
 	}
@@ -28,10 +28,10 @@ public class WarehouseModel  implements Serializable{
 	public void setEmpid(String empid) {
 		this.empid = empid;
 	}
-	public Double getAddress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(Double address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

@@ -20,7 +20,7 @@
 		insert into ward
 		(floor, room, bed)
 		values
-		(#{floor}, #{room}, #{bed}
+		(#{floor}, #{room}, #{bed})
 	</insert>
 
 	<update id="update">

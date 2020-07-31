@@ -92,8 +92,7 @@ public class SalaryController {
 	}
 	
 	@GetMapping("/get")
-	public Result<SalaryModel> getById(@RequestParam(required = true) String id, 
-			@RequestParam(required = true) Date date) throws Exception {
+	public Result<SalaryModel> getById(@RequestParam(required = true) String id) throws Exception {
 		Result<SalaryModel> result = new Result<>();
 		
 		result.setResult(salaryService.getById(id));

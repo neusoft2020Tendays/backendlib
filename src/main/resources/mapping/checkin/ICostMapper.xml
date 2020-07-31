@@ -52,4 +52,31 @@
 		where elderlyid=#{id}
 	</select>
 	
+	<select id="selectListByConditionWithPage" resultMap="CostWithElderlyResultMap">
+		select * from cost a left join elderly b on a.elderlyid=b.elderlyid where 1=1
+		<if
+			test="minMoney &gt; 0 ">
+			and costamount &gt;= #{minMoney}
+		</if>
+		<if
+			test="maxMoney &gt; 0 ">
+			and costamount &lt;= #{maxMoney}
+		</if>
+		<if
+			test="minDate != null">
+			and time &gt;= #{minDate}
+		</if>
+		<if
+			test="maxDate != null">
+			and time &lt;= #{maxDate}
+		</if>
+		<if test="elderlyid != ''">
+			and a.elderlyid = #{elderlyid}
+		</if>
+		<if test="nameKey != '' and elderlyid==''">
+			and eldername like #{nameKey}
+		</if>
+	</select>
+	
+	
 </mapper>

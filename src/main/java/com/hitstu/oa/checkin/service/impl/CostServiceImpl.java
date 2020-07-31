@@ -1,9 +1,11 @@
 package com.hitstu.oa.checkin.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SystemPropertyUtils;
 
 import com.hitstu.oa.checkin.mapper.ICostMapper;
 import com.hitstu.oa.checkin.model.CostModel;
@@ -61,5 +63,17 @@ public class CostServiceImpl implements ICostService {
 		}
 		return pageCount;
 	}
+
+	@Override
+	public List<CostModel> getListByConditionWithPage(int rows, int page, double minMoney, double maxMoney, Date minDate,
+			Date maxDate, String elderlyid, String nameKey) throws Exception {
+			
+		if (nameKey != null && nameKey.trim().length() > 0) {
+			nameKey = "%" + nameKey + "%";
+		}
+		return costMapper.selectListByConditionWithPage(rows * (page - 1), rows, minMoney, maxMoney, minDate, maxDate,
+				elderlyid,nameKey);
+	}
 	
 }
+	

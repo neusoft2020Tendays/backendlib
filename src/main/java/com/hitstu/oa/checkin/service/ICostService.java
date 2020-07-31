@@ -1,8 +1,12 @@
 package com.hitstu.oa.checkin.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hitstu.oa.checkin.model.CostModel;
+import com.hitstu.oa.checkin.model.ElderlyModel;
 
 public interface ICostService {
 	
@@ -21,5 +25,9 @@ public interface ICostService {
 	public int getCountByElderlyId(String id) throws Exception;
 	
 	public int getPageCountByElderlyId(String id,int rows) throws Exception;
+	
+	public List<CostModel> getListByConditionWithPage(@Param("start") int start, @Param("rows") int rows,
+			@Param("minMoney") double minMoney, @Param("maxMoney") double maxMoney, @Param("minDate") Date minDate,
+			@Param("maxDate") Date maxDate, @Param("elderlyid") String elderlyid,@Param("nameKey") String nameKey) throws Exception;
 
 }

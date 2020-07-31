@@ -50,4 +50,26 @@
 		select count(*) from guest
 	</select>
 	
+	<select id="selectListByConditionWithPage" resultMap="GuestWithElderlyResultMap">
+		select * from guest a left join elderly b on a.elderlyid=b.elderlyid where 1=1
+		<if
+			test="minNum &gt; 0 ">
+			and num &gt;= #{minNum}
+		</if>
+		<if
+			test="maxNum &gt; 0 ">
+			and num &lt;= #{maxNum}
+		</if>
+		<if test="elderlyid != ''">
+			and a.elderlyid = #{elderlyid}
+		</if>
+		<if test="nameKey != '' and elderlyid==''">
+			and eldername like #{nameKey}
+		</if>
+	</select>
+	
+	
+	
+	
+	
 </mapper>
